@@ -5,7 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController charaController;
-    public float speed = 12f;
+    [Header("CHARACTERistics")]
+    public Character character;
+    float speed = 12f;
+    float health = 100f;
+    float stamina = 50f;
     public float jumpSpeed = 5f;
 
     [Header ("GroundCheck")]
@@ -15,6 +19,13 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
     public float gravity = -9.81f;
     Vector3 velocity;
+
+    private void Start() 
+    {
+        speed = character.moveSpeed;
+        health = character.health;
+        stamina = character.stamina;      
+    }
     void Update()
     {
         #region player physics
@@ -41,5 +52,6 @@ public class PlayerController : MonoBehaviour
 
         #endregion
 
+       
     }
 }
