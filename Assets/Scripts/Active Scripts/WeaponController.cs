@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 { 
+    public LayerMask enemylayer;
     public bool canAttack {get ; private set;}
     [Header("Weapon Stats")]
     public Weapon weaponEquipped;
     int damage;
     float fireRate;
-    float nextAttackTime = 0f;
     int ammo;
     float cooldown;
+    float range;
 
+    float nextAttackTime = 0f;
     void Start()
     {
         damage = weaponEquipped.damage;
         fireRate = weaponEquipped.fireRate;
         ammo = weaponEquipped.ammo;
         cooldown = weaponEquipped.cooldown;
+        range = weaponEquipped.range;
 
         canAttack = true;
     }
@@ -37,5 +40,16 @@ public class WeaponController : MonoBehaviour
     void Attack()
     {
         print("ATTACK");
+        Collider[] hitEnemies = Physics.OverlapSphere(transform.position, range, enemylayer);
+
+        foreach(Collider enemy in hitEnemies)
+        {
+            enemy.GetComponent<EnemyController>().TakeDamage(5);
+        }
+    }
+
+    private void OnDrawGizmos()  
+    {      
+        Gizmos.DrawSphere(transform.position, range);
     }
 }
