@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charaController: {fileID: 635910831090486562}
-  speed: 12
+  character: {fileID: 11400000, guid: d4157dc58a1e1fc4989cf593417e1d7b, type: 2}
   jumpSpeed: 3
   groundCheck: {fileID: 635910831093793363}
   groundDistance: 0.4
