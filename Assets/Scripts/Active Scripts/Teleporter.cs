@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    public GameObject destination;
-    [SerializeField] GameObject objectToTeleport;
+    public Transform destination;
+    GameObject objectToTeleport;
+
     private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.tag == "Player")
         {
-            objectToTeleport = other.gameObject;
-            print(objectToTeleport.name);
+            //objectToTeleport = other.gameObject;
+            print(other.gameObject.name);
             print(destination.name);
-            StartCoroutine(Teleport());             
+            other.gameObject.transform.position = destination.position;    
         }
     }
 
