@@ -7,4 +7,6 @@ public class Enemy : ScriptableObject
     public float attackRate;
     public int damage;
     public int moveSpeed;
+    public int expDrop;
+    public int cost;
 }
