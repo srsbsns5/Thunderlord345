@@ -27,6 +27,15 @@ public class EnemyController : MonoBehaviour
     {
         target = FindClosestTarget();
         navAgent.SetDestination(target.transform.position);
+
+        if (navAgent.remainingDistance < 2.5f)
+        {
+            navAgent.isStopped = true;
+        }
+        else
+        {
+            navAgent.isStopped = false;
+        }
     }
 
     private GameObject FindClosestTarget()

@@ -39,8 +39,7 @@ public class WeaponController : MonoBehaviour
 
     void Attack()
     {
-        print("ATTACK");
-        Collider[] hitEnemies = Physics.OverlapSphere(transform.position, range, enemylayer);
+         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, range, enemylayer);
 
         foreach(Collider enemy in hitEnemies)
         {
