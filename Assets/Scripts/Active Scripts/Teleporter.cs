@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    private RaycastHit hit;
-    public LayerMask playerLayer;
     public Transform destination;
     GameObject objectToTeleport;
 
@@ -13,9 +11,10 @@ public class Teleporter : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            objectToTeleport = other.gameObject;
-            print(objectToTeleport);
-            objectToTeleport.transform.position = destination.transform.position;    
+            //objectToTeleport = other.gameObject;
+            print(other.gameObject.name);
+            print(destination.name);
+            other.gameObject.transform.position = destination.position;    
         }
     }
 }
