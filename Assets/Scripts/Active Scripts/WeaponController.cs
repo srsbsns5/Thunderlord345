@@ -5,7 +5,8 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 { 
     public LayerMask enemylayer;
-    public bool canAttack {get ; private set;}
+    //public bool canAttack {get ; private set;}
+
     [Header("Weapon Stats")]
     public Weapon weaponEquipped;
     int damage;
@@ -22,8 +23,7 @@ public class WeaponController : MonoBehaviour
         ammo = weaponEquipped.ammo;
         cooldown = weaponEquipped.cooldown;
         range = weaponEquipped.range;
-
-        canAttack = true;
+        
     }
     void Update()
     {
@@ -39,16 +39,17 @@ public class WeaponController : MonoBehaviour
 
     void Attack()
     {
-         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, range, enemylayer);
+        Collider[] hitEnemies = Physics.OverlapSphere(transform.position, range, enemylayer);
 
         foreach(Collider enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyController>().TakeDamage(5);
+            enemy.GetComponent<EnemyController>().TakeDamage(damage);
         }
     }
 
     private void OnDrawGizmos()  
-    {      
-        Gizmos.DrawSphere(transform.position, range);
+    {   
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

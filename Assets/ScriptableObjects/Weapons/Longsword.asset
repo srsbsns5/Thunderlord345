@@ -16,3 +16,4 @@ MonoBehaviour:
   fireRate: 2
   ammo: 50
   cooldown: 3
+  range: 1

@@ -16,11 +16,13 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
-        currentHealth = health;
         health = enemy.health;
+        currentHealth = health;
         attackRate = enemy.attackRate;
         attackDamage = enemy.damage;
         navAgent.speed = enemy.moveSpeed;
+
+        print(health);
     }
 
     private void Update()
@@ -59,9 +61,10 @@ public class EnemyController : MonoBehaviour
         return closest;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damageToTake)
     {
-        currentHealth -= damage;
+        currentHealth -= damageToTake;
+
         print("Enemy has" + currentHealth + "hp");
         
         if (currentHealth <= 0)
