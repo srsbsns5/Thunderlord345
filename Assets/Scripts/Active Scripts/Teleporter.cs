@@ -5,24 +5,30 @@ using UnityEngine;
 public class Teleporter : MonoBehaviour
 {
     public Transform destination;
-    GameObject objectToTeleport;
+
+    [SerializeField] GameObject objectToTeleport;
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.tag == "Player")
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player)
         {
-            //objectToTeleport = other.gameObject;
-            print(other.gameObject.name);
-            print(destination.name);
-            other.gameObject.transform.position = destination.position;    
+            objectToTeleport = player.gameObject;
+            StartCoroutine("Teleport");
         }
     }
 
     IEnumerator Teleport()
     {
-        yield return new WaitForSeconds(1);
         Debug.Log("TELEPORT PLEASE");
-        objectToTeleport.transform.position = destination.transform.position;   
+
+        objectToTeleport.SetActive(false);
+        yield return null;
+        objectToTeleport.transform.position = destination.position;
+        yield return null;
+        objectToTeleport.SetActive(true);
+        yield return null;
+        objectToTeleport = null;   
     }
     
 }
