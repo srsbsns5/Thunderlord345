@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnlimitedSpawn : MonoBehaviour {
-	public GameObject enemyPrefab;
-	private GameObject currentEnemy;
+	public UnityEngine.GameObject enemyPrefab;
+	private UnityEngine.GameObject currentEnemy;
 	private float respawnTimer;
 	private float delayTime = 5.0f;
 

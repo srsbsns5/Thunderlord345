@@ -15,7 +15,7 @@ public class WaterGroup : MonoBehaviour {
 	/// <summary>
 	/// List that contains all water wave plains after game start.
 	/// </summary>
-	private List<GameObject> waterWavePlains = new List<GameObject>();
+	private List<UnityEngine.GameObject> waterWavePlains = new List<UnityEngine.GameObject>();
 
 
 	void Start(){
@@ -40,8 +40,9 @@ public class WaterGroup : MonoBehaviour {
 
 	void LateUpdate () {
 		if(waterWavePlains.Count != 0){
-			foreach(GameObject g in waterWavePlains){
-				WaveAnimation (g);
+			foreach(UnityEngine.GameObject g in waterWavePlains)
+            {
+                WaveAnimation(g);
 			}
 		}
 	}
@@ -51,7 +52,7 @@ public class WaterGroup : MonoBehaviour {
 	/// Changes texture offset of waterWavePlain.
 	/// </summary>
 	/// <param name="waterWavePlain">Water wave plain GameObject.</param>
-	public void WaveAnimation(GameObject waterWavePlain){
+	public void WaveAnimation(UnityEngine.GameObject waterWavePlain){
 		if(waterWavePlain != null){
 			float dirX = Time.time * waveSpeed * waveDirection.x;
 			float dirY = Time.time * waveSpeed * waveDirection.y;

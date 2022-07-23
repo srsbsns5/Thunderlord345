@@ -7,10 +7,10 @@ public class InteractDoor : MonoBehaviour {
 	private RaycastHit hit;
 	public AudioClip gateClip;
 	private bool gateMove = false;
-	private GameObject gate;
+	private UnityEngine.GameObject gate;
 
 	void Start() {
-		gate = GameObject.FindWithTag("Gate");
+        gate = UnityEngine.GameObject.FindWithTag("Gate");
 	}
 
 	void Update() {

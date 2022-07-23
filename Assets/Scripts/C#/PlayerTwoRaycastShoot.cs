@@ -8,16 +8,16 @@ public class PlayerTwoRaycastShoot : MonoBehaviour {
 	private RaycastHit hit;
 	public Rigidbody laserTrail;
 	private int speed;
-	public GameObject explosionPrefab;
+	public UnityEngine.GameObject explosionPrefab;
 	public AudioClip fireClip;
 	public AudioClip explodeClip;
-	private GameObject controller;
+	private UnityEngine.GameObject controller;
 	private PlayerOneHealth script;
 
 void Start() {
 		speed = 10;
 		range = 2.6f;
-		controller = GameObject.Find("Game Control Center");
+        controller = UnityEngine.GameObject.Find("Game Control Center");
 		script = controller.transform.gameObject.GetComponent<PlayerOneHealth>();
 	}
 

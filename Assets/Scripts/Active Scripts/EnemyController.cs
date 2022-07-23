@@ -5,21 +5,28 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public Enemy enemy;
+    public GameObject enemy;
+    public UnityEngine.GameObject enemyPrefab;
+    [Header ("Stats")]
     float health;
     float attackRate;
     int attackDamage;
-    int moveSpeed; 
+    int moveSpeed;
+    public int expDropped; 
+    public int spawnCost;
     private float currentHealth;
-    public GameObject target {get; private set;}
+    public UnityEngine.GameObject target {get; private set;}
     NavMeshAgent navAgent;
     private void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
+
         health = enemy.health;
         currentHealth = health;
         attackRate = enemy.attackRate;
         attackDamage = enemy.damage;
+        expDropped = enemy.expDropped;
+        spawnCost = enemy.spawnCost;
         navAgent.speed = enemy.moveSpeed;
 
         print(health);
@@ -31,15 +38,15 @@ public class EnemyController : MonoBehaviour
         navAgent.SetDestination(target.transform.position);
     }
 
-    private GameObject FindClosestTarget()
+    private UnityEngine.GameObject FindClosestTarget()
     {
-        GameObject[] targets;
-        targets = GameObject.FindGameObjectsWithTag("Player");
+        UnityEngine.GameObject[] targets;
+        targets = UnityEngine.GameObject.FindGameObjectsWithTag("Player");
 
-        GameObject closest = null;
+        UnityEngine.GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
-        foreach (GameObject active in targets)
+        foreach (UnityEngine.GameObject active in targets)
         {
             Vector3 diff = active.transform.position - position;
             float curDistance = diff.sqrMagnitude;

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTwoItemPickup : MonoBehaviour {
-	private GameObject controller;
+	private UnityEngine.GameObject controller;
 	private int tokenValue;
 	private TokenScore script;
 	
 	void Start() {
-		controller = GameObject.Find("Game Controller");
+        controller = UnityEngine.GameObject.Find("Game Controller");
 		script = controller.transform.gameObject.GetComponent<TokenScore>();
 		tokenValue = 10;
 	}

@@ -12,7 +12,7 @@ public class SearchAndDestroy : MonoBehaviour {
 	}
 
 	void Update() {
-		target = GameObject.FindWithTag("Player").transform.position;
+        target = UnityEngine.GameObject.FindWithTag("Player").transform.position;
 		agent.destination = target;
 	}
 

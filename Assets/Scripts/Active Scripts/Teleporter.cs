@@ -6,7 +6,7 @@ public class Teleporter : MonoBehaviour
 {
     public Transform destination;
 
-    [SerializeField] GameObject objectToTeleport;
+    [SerializeField] UnityEngine.GameObject objectToTeleport;
 
     private void OnTriggerEnter(Collider other) 
     {

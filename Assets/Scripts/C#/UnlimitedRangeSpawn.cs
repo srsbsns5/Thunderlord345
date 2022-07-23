@@ -5,8 +5,8 @@ using UnityEngine;
 [ExecuteInEditMode()]
 
 public class UnlimitedRangeSpawn : MonoBehaviour {
-	public GameObject enemyPrefab;
-	private GameObject currentEnemy;
+	public UnityEngine.GameObject enemyPrefab;
+	private UnityEngine.GameObject currentEnemy;
 	private float respawnTimer;
 	public float delayTime = 2.0f;
 	public float spawnRange = 50.0f;
@@ -15,7 +15,7 @@ public class UnlimitedRangeSpawn : MonoBehaviour {
 	
 	void Start() {
 		respawnTimer = 0.0f;
-		target = GameObject.FindWithTag("Player").transform;
+        target = UnityEngine.GameObject.FindWithTag("Player").transform;
 	}
 
 	void Update() {

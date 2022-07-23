@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyProjectileHit : MonoBehaviour {
 	public AudioClip explodeClip;
-	public GameObject explodePrefab;
+	public UnityEngine.GameObject explodePrefab;
 
 	void OnCollisionEnter(Collision collision) {
 		if(collision.gameObject.tag == "Bullet 1" || collision.gameObject.tag == "Bullet 2") {

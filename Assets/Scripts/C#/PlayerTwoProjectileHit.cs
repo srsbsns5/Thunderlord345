@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class PlayerTwoProjectileHit : MonoBehaviour {
 	public AudioClip explodeClip;
-	public GameObject explodePrefab;
-	private GameObject controller;
+	public UnityEngine.GameObject explodePrefab;
+	private UnityEngine.GameObject controller;
 	private PlayerTwoHealth script;
 
 	void Start() {
-		controller = GameObject.Find("Game Controller");
+        controller = UnityEngine.GameObject.Find("Game Controller");
 		script = controller.transform.gameObject.GetComponent<PlayerTwoHealth>();
 	}
 

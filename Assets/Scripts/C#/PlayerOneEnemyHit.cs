@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerOneEnemyHit : MonoBehaviour {
-	private GameObject controller;
+	private UnityEngine.GameObject controller;
 	private PlayerOneHealth script;
 	
 	void Start() {
-		controller = GameObject.Find("Game Controller");
+        controller = UnityEngine.GameObject.Find("Game Controller");
 		script = controller.transform.gameObject.GetComponent<PlayerOneHealth>();
 	}
 

@@ -6,11 +6,11 @@ using UnityEngine.AI;
 public class AdvancedSearchAndDestroy : MonoBehaviour {
 	private NavMeshAgent agent;
 	private Vector3 player;
-	private GameObject manager;
+	private UnityEngine.GameObject manager;
 	
 	void Start() {
 		agent = GetComponent<NavMeshAgent>();
-		manager = GameObject.Find("Game Controller");
+        manager = UnityEngine.GameObject.Find("Game Controller");
 	}
 
 	void Update() {
@@ -18,19 +18,19 @@ public class AdvancedSearchAndDestroy : MonoBehaviour {
 		agent.destination = player;
 	}
 
-	GameObject FindClosestPlayer() {
-		// Find all game objects tagged as Player
-		GameObject[] targets;
-		targets = GameObject.FindGameObjectsWithTag("Player");
-		GameObject closestPlayer = null;
+    UnityEngine.GameObject FindClosestPlayer() {
+        // Find all game objects tagged as Player
+        UnityEngine.GameObject[] targets;
+		targets = UnityEngine.GameObject.FindGameObjectsWithTag("Player");
+        UnityEngine.GameObject closestPlayer = null;
 		var distance = Mathf.Infinity;
 		Vector3 position = transform.position;
 
 		// Iterate through them and find the closest one
-		foreach(GameObject target in targets)  {
+		foreach(UnityEngine.GameObject target in targets)  {
 			var difference = (target.transform.position - position);
 		var curDistance = difference.sqrMagnitude;
-			if(curDistance<distance) {
+			if(curDistance < distance) {
 				closestPlayer = target;
 				distance = curDistance;
 			}
