@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public GameObject enemy;
-    public UnityEngine.GameObject enemyPrefab;
+    public Enemy enemy;
+    public GameObject enemyPrefab;
     [Header ("Stats")]
     float health;
     float attackRate;
@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     public int expDropped; 
     public int spawnCost;
     private float currentHealth;
-    public UnityEngine.GameObject target {get; private set;}
+    public GameObject target {get; private set;}
     NavMeshAgent navAgent;
     private void Start()
     {
@@ -67,7 +67,15 @@ public class EnemyController : MonoBehaviour
         
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    public delegate void OnDisableCallBack(EnemyController Instance);
+    public OnDisableCallBack Disable;
+
+    private void Die()
+    {
+        Disable?.Invoke(this);      
     }
 }
