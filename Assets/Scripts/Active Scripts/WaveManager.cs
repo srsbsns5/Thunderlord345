@@ -6,22 +6,34 @@ public class WaveManager : MonoBehaviour
 {
     public int currentWave;
     public int waveValue;
+    public GameObject target;
     public List<EnemyController> enemies = new List<EnemyController>();
-    public List<UnityEngine.GameObject> enemiesToSpawn = new List<UnityEngine.GameObject>(); //prefabs
+    public List<GameObject> enemiesToSpawn = new List<GameObject>(); //prefabs
     
     void Start()
     {
         GenerateWave();
+
+        target = GameObject.FindGameObjectWithTag("Player");
+    }
+    private void Update() {
+        
+        if (enemiesToSpawn.Count >= 0)
+        {
+            Instantiate(enemiesToSpawn[0], target.transform.position, Quaternion.identity);
+            enemiesToSpawn.RemoveAt(0);
+        }
     }
 
     public void GenerateWave()
     {
         waveValue = currentWave * 10;
+        GenerateEnemies();
         //object pooling;
     }
     public void GenerateEnemies()
     {
-        List<UnityEngine.GameObject> generatedEnemies = new List<UnityEngine.GameObject>();
+        List<GameObject> generatedEnemies = new List<GameObject>();
         while (waveValue > 0)
         {
             int randEnemyID = Random.Range(0, enemies.Count);
@@ -37,8 +49,9 @@ public class WaveManager : MonoBehaviour
                 break;
             }
         }
+
         enemiesToSpawn.Clear();
         enemiesToSpawn = generatedEnemies;
-    }
 
+    }
 }

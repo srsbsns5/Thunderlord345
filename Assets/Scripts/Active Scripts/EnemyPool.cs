@@ -14,35 +14,27 @@ public class EnemyPool : MonoBehaviour
     public PoolType poolType;
 
     [SerializeField] public EnemyController goblinPrefab;
-    [SerializeField] private bool usePool;
     public bool collectionChecks = false;
-    public int maxPoolSize = 5;
+    public int maxPoolSize = 50;
 
     private ObjectPool<EnemyController> enemyPool;
 
-    private void Awake() {
-        enemyPool = new ObjectPool<EnemyController>(CreatePooledObject, OnTakeFromPool, OnReturnToPool, OnDestroyObject, collectionChecks, 1, maxPoolSize);
+    private void Awake() 
+    {
+        enemyPool = new 
+        ObjectPool<EnemyController>(CreatePooledObject, OnTakeFromPool, OnReturnToPool, OnDestroyObject, collectionChecks, 10, maxPoolSize);
     }
 
     private void OnGUI() 
     {   
-        if (usePool)
-        {
-            GUI.Label(new Rect(10,10,200,30), $"Total Pool Size: {enemyPool.CountAll}");
-            GUI.Label(new Rect(10,30,200,30), $"Active Object PoolSize: {enemyPool.CountActive}");
-        }
+        GUI.Label(new Rect(10,10,200,30), $"Total Pool Size: {enemyPool.CountAll}");
+        GUI.Label(new Rect(10,30,200,30), $"Active Object PoolSize: {enemyPool.CountActive}");
+        
     }
 
-    private void Update() {
-        if(!usePool)
-        {
-            EnemyController instance = Instantiate(goblinPrefab, Vector3.zero, Quaternion.identity);
-            instance.transform.SetParent(transform, true);
-
-            SpawnEnemy(instance);
-        }
-        else    {enemyPool.Get();}
-        
+    private void Update() 
+    {
+       
     }
 
     private EnemyController CreatePooledObject()
@@ -77,5 +69,9 @@ public class EnemyPool : MonoBehaviour
     private void SpawnEnemy(EnemyController Instance)
     {
         Vector3 spawnLocation = transform.position + Random.insideUnitSphere * 10;
+
+        Instance.transform.position = spawnLocation;
+
+        //i want to quit peer support
     }
 }
