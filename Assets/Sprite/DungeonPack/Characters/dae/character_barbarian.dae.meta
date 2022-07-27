@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Sprite/DungeonPack/Characters/dae/character_barbarian.dae.meta
 guid: 2f80c91a10ef3a2439d3569f88af6e6d
+=======
+guid: 2e032a14b5acd904f9b9f91a8620815a
+>>>>>>> Stashed changes:Assets/Terrain things/Models/objects/dae/archeryrange.dae.meta
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Sprite/DungeonPack/Characters/dae/extra heads.meta
 guid: 2b6d139a614a80a4cbd9e4a43744b02b
+=======
+guid: c6b5c609f304b6745af10279d1a76ed6
+>>>>>>> Stashed changes:Assets/Terrain things/Models/objects/fbx.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Sprite/DungeonPack/Characters/dae/character_knight.dae.meta
 guid: 82cce61c2b396864aa1fcf7c0c05c00a
+=======
+guid: fd3fc9374dd9b2a499a978dc59497d1c
+>>>>>>> Stashed changes:Assets/Terrain things/Models/objects/dae/barracks.dae.meta
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []

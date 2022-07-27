@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Sprite/DungeonPack.meta
 guid: f2e253433218136469994dab9420a9c8
+=======
+guid: ce16089c0b205c0428dd834eeac5f16e
+>>>>>>> Stashed changes:Assets/Terrain things/Models.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

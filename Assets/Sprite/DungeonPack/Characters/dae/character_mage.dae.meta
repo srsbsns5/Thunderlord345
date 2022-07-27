@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Sprite/DungeonPack/Characters/dae/character_mage.dae.meta
 guid: d47d26a9cc2394c4d86980aea26592aa
+=======
+guid: b6372daaf72b8b546a78d75b3aa6626b
+>>>>>>> Stashed changes:Assets/Terrain things/Models/objects/dae/bridge.dae.meta
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
