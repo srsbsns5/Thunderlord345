@@ -1950,6 +1950,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 635910831090486621, guid: 9ee69dcfd52262d4da78496f1a227e94, type: 3}
+      propertyPath: player
+      value: P2
+      objectReference: {fileID: 0}
     - target: {fileID: 635910831090486623, guid: 9ee69dcfd52262d4da78496f1a227e94, type: 3}
       propertyPath: m_Name
       value: Player2
@@ -1965,6 +1969,10 @@ PrefabInstance:
     - target: {fileID: 635910831090486623, guid: 9ee69dcfd52262d4da78496f1a227e94, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 635910831845851980, guid: 9ee69dcfd52262d4da78496f1a227e94, type: 3}
+      propertyPath: player
+      value: P2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ee69dcfd52262d4da78496f1a227e94, type: 3}
@@ -2050,7 +2058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4748802358385799603, guid: b45022ff1b6ff9643a85ebdaedce266e, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4748802358742209680, guid: b45022ff1b6ff9643a85ebdaedce266e, type: 3}
       propertyPath: m_RootOrder

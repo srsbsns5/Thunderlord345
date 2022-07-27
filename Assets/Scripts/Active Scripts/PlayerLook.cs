@@ -6,7 +6,7 @@ public class PlayerLook : MonoBehaviour
 {
     public float senstivity = 100f;
     public Transform playerTrans;
-
+    public string player = "P1";
     float xRotation = 0f;
 
     void Start()
@@ -16,8 +16,8 @@ public class PlayerLook : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * senstivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * senstivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X " + player) * senstivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y " + player) * senstivity * Time.deltaTime;
 
         playerTrans.Rotate(Vector3.up * mouseX);
 

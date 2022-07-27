@@ -5,12 +5,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController charaController;
+
     [Header("CHARACTERistics")]
     public Character character;
     float speed = 12f;
     float health = 100f;
     float stamina = 50f;
     public float jumpSpeed = 5f;
+
+    public string player = "P1";
 
     [Header ("GroundCheck")]
     public Transform groundCheck;
@@ -35,8 +38,8 @@ public class PlayerController : MonoBehaviour
             velocity.y = -2f;
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = Input.GetAxis("Horizontal " + player);
+        float z = Input.GetAxis("Vertical " + player);
 
         Vector3 move =  transform.right * x + transform.forward * z;
 
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         charaController.Move(velocity * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump " + player) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpSpeed * -2f * gravity);
         }
