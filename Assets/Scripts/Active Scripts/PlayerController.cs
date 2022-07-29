@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     bool isGrounded;
-    public float gravity = -9.81f;
+    public float gravity = -12f;
     Vector3 velocity;
 
     private void Start() 
