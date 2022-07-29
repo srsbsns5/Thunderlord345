@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponController : MonoBehaviour
 { 
     public LayerMask enemylayer;
     //public bool canAttack {get ; private set;}
+
+    public PlayerControls playerInputs;
+    private InputAction attack;
 
     [Header("Weapon Stats")]
     public Weapon weaponEquipped;
@@ -16,6 +20,21 @@ public class WeaponController : MonoBehaviour
     float range;
 
     float nextAttackTime = 0f;
+    
+    private void Awake() 
+    {
+        playerInputs = new PlayerControls();
+    }
+
+    private void OnEnable() 
+    {
+        attack = playerInputs.Player.Fire;
+        attack.Enable();
+    }
+    private void OnDisable() 
+    {
+        attack.Disable();
+    }
     void Start()
     {
         damage = weaponEquipped.damage;
@@ -29,11 +48,11 @@ public class WeaponController : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            /*if (Input.GetKeyDown(KeyCode.Mouse0))
+             if (playerInputs.Player.Fire.triggered)
             {
                 Attack();
                 nextAttackTime = Time.time + 1f/ fireRate;
-            }*/
+            }
         }
     }
 
@@ -44,8 +63,6 @@ public class WeaponController : MonoBehaviour
         foreach(Collider enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyController>().TakeDamage(damage);
-            if (enemy.GetComponent<EnemyController>())
-                print("true");
         }
     }
 

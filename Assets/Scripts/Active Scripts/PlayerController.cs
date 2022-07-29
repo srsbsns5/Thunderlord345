@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     
     public PlayerControls playerInputs;
     private InputAction move;
+    private InputAction jump;
 
     [Header("CHARACTERistics")]
     public Character character;
@@ -32,7 +33,8 @@ public class PlayerController : MonoBehaviour
         health = character.health;
         stamina = character.stamina;      
     }
-    private void Awake() {
+    private void Awake() 
+    {
         playerInputs = new PlayerControls();
     }
 
@@ -40,10 +42,13 @@ public class PlayerController : MonoBehaviour
     {
         move = playerInputs.Player.Move;
         move.Enable();
+        jump = playerInputs.Player.Jump;
+        jump.Enable();
     }
     private void OnDisable() 
     {
         move.Disable();
+        jump.Disable();
     }
 
     void Update()
@@ -56,16 +61,16 @@ public class PlayerController : MonoBehaviour
         }
 
         moveDirection = move.ReadValue<Vector2>();
+        Vector3 movement =(moveDirection.y * transform.forward) + (moveDirection.x * transform.right);
+        charaController.Move(movement * speed * Time.deltaTime);
 
-        charaController.Move(moveDirection * speed * Time.deltaTime);
+        velocity.y += gravity * Time.deltaTime;
+        charaController.Move(velocity * Time.deltaTime);
 
-        //velocity.y += gravity * Time.deltaTime;
-        //charaController.Move(velocity * Time.deltaTime);
-
-        /*if (Input.GetButtonDown("Jump") && isGrounded)
+        if (playerInputs.Player.Jump.triggered && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpSpeed * -2f * gravity);
-        }*/
+        }
 
         #endregion
 
