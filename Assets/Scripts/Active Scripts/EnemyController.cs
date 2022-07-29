@@ -76,6 +76,12 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        Disable?.Invoke(this);      
+        Disable?.Invoke(this);
+        
+        //Have to change this functionality to make it applicable for 2 players, this is just for testing
+        FindObjectOfType<LevelSystem>().GainEXP(expDropped);
+
+                    gameObject.SetActive(false);
+
     }
 }

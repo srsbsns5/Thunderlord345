@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("CHARACTERistics")]
     public Character character;
     float speed = 12f;
-    float health = 100f;
+    public float maxHealth = 100f;
     float stamina = 50f;
     public float jumpSpeed = 5f;
 
@@ -26,12 +27,19 @@ public class PlayerController : MonoBehaviour
     public float gravity = -12f;
     Vector3 velocity;
 
+    [Header("UI")]
+    public Image healthBar;
+    public float currentHealth;
+    public Text healthText;
+
     Vector2 moveDirection = Vector2.zero;
     private void Start() 
     {
         speed = character.moveSpeed;
-        health = character.health;
         stamina = character.stamina;      
+        maxHealth = character.health;
+        currentHealth = maxHealth;
+        healthText.text = currentHealth + "/" + maxHealth;
     }
     private void Awake() 
     {
@@ -73,7 +81,7 @@ public class PlayerController : MonoBehaviour
         }
 
         #endregion
-
-       
+    
+        healthText.text = currentHealth + "/" + maxHealth;
     }
 }

@@ -11,13 +11,17 @@ public class LevelSystem : MonoBehaviour
     private float lerpTimer;
     private float delayTimer;
 
+    PlayerController playerHealth;
+
     [Header ("UI")]
     public Image frontXPBar;
     public Image backXPBar;
     public Image xpBarHolder;
+    public Text levelText;
+    public Text xpText;
 
     [Header ("Calculations")]
-    public float additionMultiplier = 300;
+    public float additionMultiplier = 10;
     public float powerMultiplier = 2;
     public float divisionMultiplier = 7;
 
@@ -25,15 +29,20 @@ public class LevelSystem : MonoBehaviour
     {
         frontXPBar.fillAmount = currentXP /requiredXP;
         backXPBar.fillAmount = currentXP /requiredXP;
+        levelText.text = "Level " + level;
 
         requiredXP = CalculateRequiredXP();
+
+        //FindObjectOfType is a bad idea when dealing with two or more players
+        //Again this is just for testing
+        playerHealth = FindObjectOfType<PlayerController>();
     }
 
     void Update()
     {
         UpdateXPUI();
 
-        if(currentXP > requiredXP)
+        if(currentXP >= requiredXP)
         {
             LevelUp();
         }
@@ -49,13 +58,17 @@ public class LevelSystem : MonoBehaviour
         {
             delayTimer += Time.deltaTime;
             backXPBar.fillAmount = xpFraction;
-            if (delayTimer > 3)
+            if (delayTimer > 1)
             {
                 lerpTimer += Time.deltaTime;
                 float percentComplete = lerpTimer / 4;
                 frontXPBar.fillAmount = Mathf.Lerp(FXP, backXPBar.fillAmount, percentComplete);
             }
         }
+
+        xpText.text = currentXP + "/" + requiredXP;
+        levelText.text = "Level " + level;
+
     }
     public void GainEXP(float xpGained)
     {
@@ -69,7 +82,9 @@ public class LevelSystem : MonoBehaviour
         frontXPBar.fillAmount = 0;
         backXPBar.fillAmount = 0;
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);
+        
         //Increase stats
+        playerHealth.maxHealth = Mathf.RoundToInt(playerHealth.maxHealth + level * 2.5f);
 
         requiredXP = CalculateRequiredXP();
     }

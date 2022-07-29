@@ -52,6 +52,7 @@ public class WeaponController : MonoBehaviour
             {
                 Attack();
                 nextAttackTime = Time.time + 1f/ fireRate;
+                FindObjectOfType<LevelSystem>().GainEXP(5);             
             }
         }
     }
