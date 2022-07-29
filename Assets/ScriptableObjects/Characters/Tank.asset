@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   stamina: 50
-  moveSpeed: 7
+  moveSpeed: 5

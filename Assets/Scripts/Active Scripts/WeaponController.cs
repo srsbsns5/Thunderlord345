@@ -44,6 +44,8 @@ public class WeaponController : MonoBehaviour
         foreach(Collider enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyController>().TakeDamage(damage);
+            if (enemy.GetComponent<EnemyController>())
+                print("true");
         }
     }
 
