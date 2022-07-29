@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     public CharacterController charaController;
+    
+    public PlayerControls playerInputs;
+    private InputAction move;
+
     [Header("CHARACTERistics")]
     public Character character;
     float speed = 12f;
@@ -20,12 +25,27 @@ public class PlayerController : MonoBehaviour
     public float gravity = -12f;
     Vector3 velocity;
 
+    Vector2 moveDirection = Vector2.zero;
     private void Start() 
     {
         speed = character.moveSpeed;
         health = character.health;
         stamina = character.stamina;      
     }
+    private void Awake() {
+        playerInputs = new PlayerControls();
+    }
+
+    private void OnEnable() 
+    {
+        move = playerInputs.Player.Move;
+        move.Enable();
+    }
+    private void OnDisable() 
+    {
+        move.Disable();
+    }
+
     void Update()
     {
         #region player physics
@@ -35,20 +55,17 @@ public class PlayerController : MonoBehaviour
             velocity.y = -2f;
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        moveDirection = move.ReadValue<Vector2>();
 
-        Vector3 move =  transform.right * x + transform.forward * z;
+        charaController.Move(moveDirection * speed * Time.deltaTime);
 
-        charaController.Move(move * speed * Time.deltaTime);
+        //velocity.y += gravity * Time.deltaTime;
+        //charaController.Move(velocity * Time.deltaTime);
 
-        velocity.y += gravity * Time.deltaTime;
-        charaController.Move(velocity * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        /*if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpSpeed * -2f * gravity);
-        }
+        }*/
 
         #endregion
 

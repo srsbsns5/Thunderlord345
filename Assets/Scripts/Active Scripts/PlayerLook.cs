@@ -13,7 +13,7 @@ public class PlayerLook : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
-
+/*
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * senstivity * Time.deltaTime;
@@ -26,4 +26,5 @@ public class PlayerLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
     }
+*/
 }
