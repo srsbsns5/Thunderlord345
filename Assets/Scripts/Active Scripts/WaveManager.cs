@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class WaveManager : MonoBehaviour
     public GameObject target;
     public List<EnemyController> enemies = new List<EnemyController>();
     public List<GameObject> enemiesToSpawn = new List<GameObject>(); //prefabs
+
+    public Text waveText;
     
     void Start()
     {
@@ -16,21 +19,24 @@ public class WaveManager : MonoBehaviour
 
         target = GameObject.FindGameObjectWithTag("Player");
     }
-    private void Update() {
-        
-        if (enemiesToSpawn.Count >= 0)
+    private void Update() 
+    {
+        waveText.text = "Wave " + currentWave;
+       
+        /*if (enemiesToSpawn.Count >= 0)
         {
             Instantiate(enemiesToSpawn[0], target.transform.position, Quaternion.identity);
             enemiesToSpawn.RemoveAt(0);
-        }
+        }*/
     }
 
     public void GenerateWave()
     {
-        waveValue = currentWave * 10;
-        GenerateEnemies();
+        waveValue = currentWave * 10;        
+        //GenerateEnemies();
         //object pooling;
     }
+    /*
     public void GenerateEnemies()
     {
         List<GameObject> generatedEnemies = new List<GameObject>();
@@ -53,5 +59,5 @@ public class WaveManager : MonoBehaviour
         enemiesToSpawn.Clear();
         enemiesToSpawn = generatedEnemies;
 
-    }
+    }*/
 }

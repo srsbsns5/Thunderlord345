@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public PlayerControls playerInputs;
     private InputAction move;
     private InputAction jump;
+    private InputAction interact;
 
     [Header("CHARACTERistics")]
     public Character character;
@@ -52,11 +53,14 @@ public class PlayerController : MonoBehaviour
         move.Enable();
         jump = playerInputs.Player.Jump;
         jump.Enable();
+        interact = playerInputs.Player.Interact;
+        interact.Enable();
     }
     private void OnDisable() 
     {
         move.Disable();
         jump.Disable();
+        interact.Disable();
     }
 
     void Update()
@@ -83,5 +87,10 @@ public class PlayerController : MonoBehaviour
         #endregion
     
         healthText.text = currentHealth + "/" + maxHealth;
+
+        if (playerInputs.Player.Interact.triggered)
+        {
+            
+        }
     }
 }
