@@ -7,16 +7,21 @@ public class EnemyController : MonoBehaviour
 {
     public Enemy enemy;
     public GameObject enemyPrefab;
+    public GameObject target {get; private set;}
+    NavMeshAgent navAgent;
     [Header ("Stats")]
     float health;
     float attackRate;
     int attackDamage;
     int moveSpeed;
-    public int expDropped; 
+    public int expAmt; 
     public int spawnCost;
     private float currentHealth;
-    public GameObject target {get; private set;}
-    NavMeshAgent navAgent;
+
+    [Header("Drops")]
+    public WeightedRandomList<Transform> dropTable;
+
+    
     private void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
@@ -25,7 +30,7 @@ public class EnemyController : MonoBehaviour
         currentHealth = health;
         attackRate = enemy.attackRate;
         attackDamage = enemy.damage;
-        expDropped = enemy.expDropped;
+        expAmt = enemy.expDropped;
         spawnCost = enemy.spawnCost;
         navAgent.speed = enemy.moveSpeed;
 
@@ -77,11 +82,12 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         Disable?.Invoke(this);
+        Transform item = dropTable.GetRandom();
+        Instantiate(item, transform);
         
         //Have to change this functionality to make it applicable for 2 players, this is just for testing
-        FindObjectOfType<LevelSystem>().GainEXP(expDropped);
-
-                    gameObject.SetActive(false);
+        FindObjectOfType<LevelSystem>().GainEXP(expAmt);
+        //gameObject.SetActive(false);
 
     }
 }
