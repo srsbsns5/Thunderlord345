@@ -16,5 +16,5 @@ MonoBehaviour:
   attackRate: 5
   damage: 5
   moveSpeed: 5
-  expDrop: 10
-  cost: 0
+  expDropped: 5
+  spawnCost: 0
