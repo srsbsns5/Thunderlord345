@@ -8,22 +8,26 @@ public class LoadScene : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1f;
     }
 
     public void StartGame()
     {
         SceneManager.LoadScene("TestScene");
+        Time.timeScale = 1f;
 
     }
 
     public void Instructions()
     {
         SceneManager.LoadScene("Instructions");
+        Time.timeScale = 1f;
     }
 
     public void Credits()
     {
         SceneManager.LoadScene("Credits");
+        Time.timeScale = 1f;
     }
      public void QuitGame()
     {
