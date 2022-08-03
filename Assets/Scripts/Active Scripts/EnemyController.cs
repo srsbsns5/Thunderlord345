@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
@@ -22,7 +23,7 @@ public class EnemyController : MonoBehaviour
     public WeightedRandomList<Transform> dropTable;
 
     
-    private void Start()
+    private void OnEnable()
     {
         navAgent = GetComponent<NavMeshAgent>();
 
@@ -33,8 +34,6 @@ public class EnemyController : MonoBehaviour
         expAmt = enemy.expDropped;
         spawnCost = enemy.spawnCost;
         navAgent.speed = enemy.moveSpeed;
-
-        print(health);
     }
 
     private void Update()
@@ -76,18 +75,21 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public delegate void OnDisableCallBack(EnemyController Instance);
-    public OnDisableCallBack Disable;
+    public delegate void OnDeath(EnemyController Instance);
+    public OnDeath Disable;    
+    EnemyPool enemyPool;
 
     private void Die()
     {
         Disable?.Invoke(this);
-        Transform item = dropTable.GetRandom();
-        Instantiate(item, transform);
+        
+        //Transform item = dropTable.GetRandom();
+        //Instantiate(item, transform);
         
         //Have to change this functionality to make it applicable for 2 players, this is just for testing
-        FindObjectOfType<LevelSystem>().GainEXP(expAmt);
-        //gameObject.SetActive(false);
-
+        //FindObjectOfType<LevelSystem>().GainEXP(expAmt); this is for xp
+        //enemyPool.ReturnObjectToPool(this);
     }
+
+
 }

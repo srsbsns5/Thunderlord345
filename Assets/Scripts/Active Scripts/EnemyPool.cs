@@ -7,16 +7,16 @@ public class EnemyPool : MonoBehaviour
 {
     public enum PoolType
     {
-       Goblin,
-       Orc
+       Enemy1,
+       Enemy2
     } 
 
     public PoolType poolType;
 
-    [SerializeField] public EnemyController goblinPrefab;
     public bool collectionChecks = false;
     public int maxPoolSize = 50;
 
+    [SerializeField] public EnemyController enemyPrefab;
     private ObjectPool<EnemyController> enemyPool;
 
     private void Awake() 
@@ -34,26 +34,26 @@ public class EnemyPool : MonoBehaviour
 
     private void Update() 
     {
-       
+
     }
 
     private EnemyController CreatePooledObject()
     {
-        EnemyController instance = Instantiate(goblinPrefab, Vector3.zero, Quaternion.identity);
-        instance.Disable += ReturnObjectToPool;
+        EnemyController instance = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
         instance.gameObject.SetActive(false);
+        instance.Disable += ReturnObjectToPool;
 
         return instance;
-    }
-    private void ReturnObjectToPool(EnemyController Instance)
-    {
-        enemyPool.Release(Instance);
     }
     private void OnTakeFromPool(EnemyController Instance)
     {
         Instance.gameObject.SetActive(true);
-        SpawnEnemy(Instance);
+        //SpawnEnemy(Instance);
         Instance.transform.SetParent(transform, true);
+    }
+    public void ReturnObjectToPool(EnemyController Instance)
+    {
+        enemyPool.Release(Instance);
     }
 
     private void OnReturnToPool(EnemyController Instance)
@@ -71,7 +71,5 @@ public class EnemyPool : MonoBehaviour
         Vector3 spawnLocation = transform.position + Random.insideUnitSphere * 10;
 
         Instance.transform.position = spawnLocation;
-
-        //i want to quit peer support
     }
 }
