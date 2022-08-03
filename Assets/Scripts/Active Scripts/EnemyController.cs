@@ -34,6 +34,8 @@ public class EnemyController : MonoBehaviour
         expAmt = enemy.expDropped;
         spawnCost = enemy.spawnCost;
         navAgent.speed = enemy.moveSpeed;
+
+        print(health);
     }
 
     private void Update()
@@ -75,20 +77,22 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public delegate void OnDeath(EnemyController Instance);
-    public OnDeath Disable;    
-    EnemyPool enemyPool;
+    public System.Action<EnemyController> _killAction;
+    
+    public void Init(System.Action<EnemyController> killAction)
+    {
+        _killAction = killAction;
+    }
 
     private void Die()
     {
-        Disable?.Invoke(this);
-        
-        //Transform item = dropTable.GetRandom();
-        //Instantiate(item, transform);
+        _killAction(this);
+
+        Transform item = dropTable.GetRandom();
+        Instantiate(item, transform);
         
         //Have to change this functionality to make it applicable for 2 players, this is just for testing
-        //FindObjectOfType<LevelSystem>().GainEXP(expAmt); this is for xp
-        //enemyPool.ReturnObjectToPool(this);
+        FindObjectOfType<LevelSystem>().GainEXP(expAmt);
     }
 
 

@@ -41,8 +41,6 @@ public class EnemyPool : MonoBehaviour
     {
         EnemyController instance = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
         instance.gameObject.SetActive(false);
-        instance.Disable += ReturnObjectToPool;
-
         return instance;
     }
     private void OnTakeFromPool(EnemyController Instance)

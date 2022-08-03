@@ -951,7 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac1e8fb7205a694c969a280d1d66bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  senstivity: 100
+  senstivity: 20
   playerTrans: {fileID: 9186558017848386641}
 --- !u!1 &9186558017848386655
 GameObject:
@@ -1003,8 +1003,8 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2.29
   m_Radius: 0.65
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 10
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   charaController: {fileID: 9186558017848386640}
   character: {fileID: 11400000, guid: d4157dc58a1e1fc4989cf593417e1d7b, type: 2}
   maxHealth: 100
-  jumpSpeed: 1
+  jumpSpeed: 0.5
   groundCheck: {fileID: 9186558017340937782}
   groundDistance: 0.4
   groundMask:
