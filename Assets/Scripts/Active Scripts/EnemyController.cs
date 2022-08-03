@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     public WeightedRandomList<Transform> dropTable;
 
     
-    private void Start()
+    private void OnEnable()
     {
         navAgent = GetComponent<NavMeshAgent>();
 
@@ -75,18 +75,21 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public delegate void OnDisableCallBack(EnemyController Instance);
-    public OnDisableCallBack Disable;    
+    public delegate void OnDeath(EnemyController Instance);
+    public OnDeath Disable;    
     EnemyPool enemyPool;
 
     private void Die()
     {
-        Transform item = dropTable.GetRandom();
-        Instantiate(item, transform);
+        Disable?.Invoke(this);
+        
+        //Transform item = dropTable.GetRandom();
+        //Instantiate(item, transform);
         
         //Have to change this functionality to make it applicable for 2 players, this is just for testing
         //FindObjectOfType<LevelSystem>().GainEXP(expAmt); this is for xp
-        enemyPool.ReturnObjectToPool(this);
-        Disable?.Invoke(this);
+        //enemyPool.ReturnObjectToPool(this);
     }
+
+
 }

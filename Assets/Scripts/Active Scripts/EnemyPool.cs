@@ -34,14 +34,14 @@ public class EnemyPool : MonoBehaviour
 
     private void Update() 
     {
-       enemyPool.Get();
+
     }
 
     private EnemyController CreatePooledObject()
     {
         EnemyController instance = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
-        instance.Disable += ReturnObjectToPool;
         instance.gameObject.SetActive(false);
+        instance.Disable += ReturnObjectToPool;
 
         return instance;
     }
@@ -71,7 +71,5 @@ public class EnemyPool : MonoBehaviour
         Vector3 spawnLocation = transform.position + Random.insideUnitSphere * 10;
 
         Instance.transform.position = spawnLocation;
-
-        //i want to quit peer support
     }
 }
