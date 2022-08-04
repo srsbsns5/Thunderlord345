@@ -5,41 +5,35 @@ using UnityEngine.Pool;
 
 public class EnemyObjectPool : MonoBehaviour
 {
-    [SerializeField] EnemyController enemyPrefab;
-    [SerializeField] int spawnAmount;
+    public EnemyController enemy;
+    public int spawnCost;
+    [SerializeField] int initialSpawnAmount;
     public bool collectionChecks = true;
-    ObjectPool<EnemyController> enemyPool;
+    public ObjectPool<EnemyController> enemyPool;
 
     void Awake()
     {
         //createFunc, actionOnGet, actionOnRelease, actionOnDestroy
         enemyPool = new ObjectPool<EnemyController>(() =>
-        {   return Instantiate(enemyPrefab, transform);}, enemyInstance =>
+        {   return Instantiate(enemy, transform);}, enemyInstance =>
         {   enemyInstance.gameObject.SetActive(true);}, enemyInstance =>
         {   enemyInstance.gameObject.SetActive(false);}, enemyInstance =>
         {   Destroy(enemyInstance.gameObject);},
             collectionChecks);
         
-        CreateEnemy();
-    }
-    private void OnGUI() 
-    {   
-        GUI.Label(new Rect(10,10,200,30), $"Total Pool Size: {enemyPool.CountAll}");       
-        GUI.Label(new Rect(10,10,200,40), $"Total Pool Size: {enemyPool.CountActive}");       
+        for (int i = 0; i < initialSpawnAmount; i++)    InitialEnemySpawn();    
     }
 
-    private void CreateEnemy()
+    private void InitialEnemySpawn()
     {
-        for (var i = 0; i < spawnAmount; i++)
-        {
-            var enemyInstance = enemyPool.Get();
-            enemyInstance.gameObject.SetActive(false);
-            enemyInstance.Init(KillEnemy);
-        }
+        var enemyInstance = enemyPool.Get();
+        enemyInstance.Init(KillEnemy);
+        enemyInstance.StartCoroutine("ReturnToPool", 0);
     }
 
     private void KillEnemy(EnemyController enemyInstance)
     {
+        enemyInstance.StopAllCoroutines();
         enemyPool.Release(enemyInstance);
     }
 }

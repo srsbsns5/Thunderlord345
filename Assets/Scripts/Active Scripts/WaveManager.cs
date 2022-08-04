@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
@@ -8,8 +9,8 @@ public class WaveManager : MonoBehaviour
     public int currentWave;
     public int waveValue;
     public GameObject target;
-    public List<EnemyController> enemies = new List<EnemyController>();
-    public List<GameObject> enemiesToSpawn = new List<GameObject>(); //prefabs
+    public List<EnemyObjectPool> enemyPools = new List<EnemyObjectPool>(); //enemy pools
+    public List<EnemyObjectPool> enemiesToSpawn = new List<EnemyObjectPool>(); //prefabs
 
     public Text waveText;
     
@@ -23,31 +24,30 @@ public class WaveManager : MonoBehaviour
     {
         waveText.text = "Wave " + currentWave;
        
-        /*if (enemiesToSpawn.Count >= 0)
+        if (enemiesToSpawn.Count > 0)
         {
-            Instantiate(enemiesToSpawn[0], target.transform.position, Quaternion.identity);
+            enemyPools[0].enemyPool.Get();
             enemiesToSpawn.RemoveAt(0);
-        }*/
+        }
     }
 
     public void GenerateWave()
     {
         waveValue = currentWave * 10;        
-        //GenerateEnemies();
-        //object pooling;
+        GenerateEnemies();
     }
-    /*
+    
     public void GenerateEnemies()
     {
-        List<GameObject> generatedEnemies = new List<GameObject>();
+        List<EnemyObjectPool> generatedEnemies = new List<EnemyObjectPool>();
         while (waveValue > 0)
         {
-            int randEnemyID = Random.Range(0, enemies.Count);
-            int randEnemyCost = enemies[randEnemyID].spawnCost;
+            int randEnemyID = Random.Range(0, enemyPools.Count);
+            int randEnemyCost = enemyPools[randEnemyID].spawnCost;
 
             if (waveValue-randEnemyCost>=0)
             {
-                generatedEnemies.Add(enemies[randEnemyID].enemyPrefab);
+                generatedEnemies.Add(enemyPools[randEnemyID]);
                 waveValue -= randEnemyCost;
             }
             else if(waveValue <= 0)
@@ -58,6 +58,5 @@ public class WaveManager : MonoBehaviour
 
         enemiesToSpawn.Clear();
         enemiesToSpawn = generatedEnemies;
-
-    }*/
+    }
 }

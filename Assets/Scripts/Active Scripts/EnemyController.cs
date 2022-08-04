@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class EnemyController : MonoBehaviour
     public Enemy enemy;
     public GameObject enemyPrefab;
     public GameObject target {get; private set;}
+    public Action<EnemyController> killAction;
     NavMeshAgent navAgent;
     [Header ("Stats")]
     float health;
@@ -16,7 +18,6 @@ public class EnemyController : MonoBehaviour
     int attackDamage;
     int moveSpeed;
     public int expAmt; 
-    public int spawnCost;
     private float currentHealth;
 
     [Header("Drops")]
@@ -32,7 +33,6 @@ public class EnemyController : MonoBehaviour
         attackRate = enemy.attackRate;
         attackDamage = enemy.damage;
         expAmt = enemy.expDropped;
-        spawnCost = enemy.spawnCost;
         navAgent.speed = enemy.moveSpeed;
 
         print(health);
@@ -77,23 +77,27 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public System.Action<EnemyController> _killAction;
-    
-    public void Init(System.Action<EnemyController> killAction)
-    {
-        _killAction = killAction;
-    }
-
     private void Die()
     {
-        _killAction(this);
-
-        Transform item = dropTable.GetRandom();
-        Instantiate(item, transform);
+        //Drops
+        //Transform item = dropTable.GetRandom();
+        //Instantiate(item, transform);
+        //item.SetParent(null);
         
         //Have to change this functionality to make it applicable for 2 players, this is just for testing
-        FindObjectOfType<LevelSystem>().GainEXP(expAmt);
+        //FindObjectOfType<LevelSystem>().GainEXP(expAmt); //Gain exp for both players supposedly        
+        killAction(this); //Returns item to pool
     }
 
+    public IEnumerator ReturnToPool(int i)
+    {
+        yield return new WaitForSeconds(i);
+        yield return null;
+        killAction(this);
+    }
 
+        public void Init(Action<EnemyController> _killAction)
+    {
+        killAction = _killAction;
+    }
 }

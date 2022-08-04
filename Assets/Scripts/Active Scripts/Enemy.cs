@@ -8,5 +8,4 @@ public class Enemy : ScriptableObject
     public int damage;
     public int moveSpeed;
     public int expDropped;
-    public int spawnCost;
 }
