@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f259226a7e6aa5e4cab4afb3bf80c144, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  damage: 0
-  fireRate: 0
-  ammo: 0
-  cooldown: 0
-  range: 0
+  damage: 6
+  fireRate: 1
+  ammo: 50
+  cooldown: 3
+  range: 2
