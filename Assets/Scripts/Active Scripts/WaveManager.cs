@@ -8,17 +8,14 @@ public class WaveManager : MonoBehaviour
 {
     public int currentWave;
     public int waveValue;
-    public GameObject target;
     public List<EnemyObjectPool> enemyPools = new List<EnemyObjectPool>(); //enemy pools
-    public List<EnemyObjectPool> enemiesToSpawn = new List<EnemyObjectPool>(); //prefabs
+    public List<EnemyObjectPool> enemiesToSpawn = new List<EnemyObjectPool>();
 
     public Text waveText;
     
     void Start()
     {
         GenerateWave();
-
-        target = GameObject.FindGameObjectWithTag("Player");
     }
     private void Update() 
     {
@@ -56,7 +53,7 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        enemiesToSpawn.Clear();
         enemiesToSpawn = generatedEnemies;
+        enemiesToSpawn.Clear();
     }
 }
