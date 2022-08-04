@@ -54,7 +54,6 @@ public class Chest : MonoBehaviour
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName("ChestOpen");
     }
-
     bool InRange()
     {
         GameObject nearestPlayer = FindClosestPlayer();
@@ -71,6 +70,7 @@ public class Chest : MonoBehaviour
             return false;
         }
     }
+
 
     private UnityEngine.GameObject FindClosestPlayer()
     {

@@ -7,11 +7,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController charaController;
-    
     public PlayerControls playerInputs;
     private InputAction move;
     private InputAction jump;
     private InputAction interact;
+    [Header("Picking Upping")]
+    public GameObject itemToPick;
+    [SerializeField] GameObject pickupGlow;
+
 
     [Header("CHARACTERistics")]
     public Character character;
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public Text healthText;
 
     Vector2 moveDirection = Vector2.zero;
+    WeaponController wepaon;
     private void Start() 
     {
         speed = character.moveSpeed;
@@ -41,6 +45,8 @@ public class PlayerController : MonoBehaviour
         maxHealth = character.health;
         currentHealth = maxHealth;
         healthText.text = currentHealth + "/" + maxHealth;
+
+        wepaon = GetComponent<WeaponController>();
     }
     private void Awake() 
     {
@@ -88,9 +94,16 @@ public class PlayerController : MonoBehaviour
     
         healthText.text = currentHealth + "/" + maxHealth;
 
-        if (playerInputs.Player.Interact.triggered)
+        if (itemToPick != null) PickUpItem();
+        else return;
+    }
+
+    void PickUpItem()
+    {        
+        if(playerInputs.Player.Interact.triggered)
         {
-            
+            print("Item Picked Up");
+            wepaon.weaponEquipped = itemToPick.GetComponent<Weapon>();
         }
     }
 }

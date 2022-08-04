@@ -7,7 +7,7 @@ public class EnemyObjectPool : MonoBehaviour
 {
     [SerializeField] EnemyController enemyPrefab;
     [SerializeField] int spawnAmount;
-    public bool collectionChecks = false;
+    public bool collectionChecks = true;
     ObjectPool<EnemyController> enemyPool;
 
     void Awake()
@@ -19,12 +19,13 @@ public class EnemyObjectPool : MonoBehaviour
         {   enemyInstance.gameObject.SetActive(false);}, enemyInstance =>
         {   Destroy(enemyInstance.gameObject);},
             collectionChecks);
-
+        
         CreateEnemy();
     }
     private void OnGUI() 
     {   
         GUI.Label(new Rect(10,10,200,30), $"Total Pool Size: {enemyPool.CountAll}");       
+        GUI.Label(new Rect(10,10,200,40), $"Total Pool Size: {enemyPool.CountActive}");       
     }
 
     private void CreateEnemy()
@@ -34,7 +35,6 @@ public class EnemyObjectPool : MonoBehaviour
             var enemyInstance = enemyPool.Get();
             enemyInstance.gameObject.SetActive(false);
             enemyInstance.Init(KillEnemy);
-            //enemyInstance.transform.position = transform.position + Random.insideUnitSphere * 10;
         }
     }
 

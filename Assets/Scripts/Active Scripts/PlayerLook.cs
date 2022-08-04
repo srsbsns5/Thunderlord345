@@ -9,6 +9,8 @@ public class PlayerLook : MonoBehaviour
     public Transform playerTrans;
     public PlayerControls playerInputs;
     private InputAction look;
+    private InputAction interact;
+
 
     float xRotation = 0f;
     Vector2 lookDirection;
@@ -21,10 +23,13 @@ public class PlayerLook : MonoBehaviour
     {
         look = playerInputs.Player.Look;
         look.Enable();
+        interact = playerInputs.Player.Interact;
+        interact.Enable(); 
     }
     private void OnDisable() 
     {
         look.Disable();
+        interact.Disable();
     }
     void Start()
     {
@@ -42,4 +47,11 @@ public class PlayerLook : MonoBehaviour
         
         playerTrans.Rotate(Vector3.up * mouseX);
     }
+
+
+    [SerializeField] LayerMask interactableLayer;
+    [SerializeField] float pickupRange;
+    [SerializeField] RaycastHit hit;
+
+
 }
