@@ -16,26 +16,30 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         GenerateWave();
+        waveValue = currentWave * 10;  
     }
+
     private void Update() 
     {
-        waveText.text = "Wave " + currentWave;
-       
         if (enemiesToSpawn.Count > 0)
         {
             enemyPools[0].enemyPool.Get();
             enemiesToSpawn.RemoveAt(0);
+            print("enemies spawned");
         }
     }
 
     public void GenerateWave()
     {
+        print("wave generated");
+        waveText.text = "Wave " + currentWave;
         waveValue = currentWave * 10;        
         GenerateEnemies();
     }
     
     public void GenerateEnemies()
     {
+        print("enemies generated");
         List<EnemyObjectPool> generatedEnemies = new List<EnemyObjectPool>();
         while (waveValue > 0)
         {
@@ -47,7 +51,7 @@ public class WaveManager : MonoBehaviour
                 generatedEnemies.Add(enemyPools[randEnemyID]);
                 waveValue -= randEnemyCost;
             }
-            else if(waveValue <= 0)
+            else if(waveValue < 0)
             {
                 break;
             }
