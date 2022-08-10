@@ -23,11 +23,13 @@ public class EnemyController : MonoBehaviour
     [Header("Drops")]
     public WeightedRandomList<Transform> dropTable;
 
+    private void Awake()
+    {
+        navAgent = GetComponent<NavMeshAgent>();
+    }
     
     private void OnEnable()
     {
-        navAgent = GetComponent<NavMeshAgent>();
-
         health = enemy.health;
         currentHealth = health;
         attackRate = enemy.attackRate;
@@ -79,13 +81,18 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        //Drops
-        //Transform item = dropTable.GetRandom();
-        //Instantiate(item, transform);
-        //item.SetParent(null);
+        //Manage item drops do this in an event instead lol
+        Transform item = dropTable.GetRandom();
+        Instantiate(item, transform);
+        item.SetParent(null);
         
-        //Have to change this functionality to make it applicable for 2 players, this is just for testing
-        //FindObjectOfType<LevelSystem>().GainEXP(expAmt); //Gain exp for both players supposedly        
+
+        //Have to change this functionality to make it applicable for 2 players, this was just for testing
+        //FindObjectOfType<LevelSystem>().GainEXP(expAmt);
+        print(killAction);
+        print(this);
+        
+        this.StopAllCoroutines();
         killAction(this); //Returns item to pool
     }
 

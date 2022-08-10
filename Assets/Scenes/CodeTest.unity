@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -696,8 +696,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3055a6ea687b1b14995bf7db7c485319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2765425930955780711, guid: 9516d13eb360c074e858c1fe0c3c805d, type: 3}
-  spawnAmount: 20
+  enemy: {fileID: 2765425930955780711, guid: 9516d13eb360c074e858c1fe0c3c805d, type: 3}
+  spawnCost: 3
+  initialSpawnAmount: 10
   collectionChecks: 1
 --- !u!4 &489112601
 Transform:
@@ -804,7 +805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1138600842
 Transform:
   m_ObjectHideFlags: 0
@@ -833,9 +834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWave: 1
   waveValue: 1
-  target: {fileID: 0}
-  enemies:
-  - {fileID: 5053982435716061988, guid: 9ba2525e588c43441a85cbd5762b235c, type: 3}
+  enemyPools: []
   enemiesToSpawn: []
   waveText: {fileID: 0}
 --- !u!1 &1160164929

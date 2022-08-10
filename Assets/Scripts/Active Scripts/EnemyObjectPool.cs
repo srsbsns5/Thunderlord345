@@ -16,7 +16,8 @@ public class EnemyObjectPool : MonoBehaviour
         //createFunc, actionOnGet, actionOnRelease, actionOnDestroy
         enemyPool = new ObjectPool<EnemyController>(() =>
         {   return Instantiate(enemy, transform);}, enemyInstance =>
-        {   enemyInstance.gameObject.SetActive(true);}, enemyInstance =>
+        {   enemyInstance.gameObject.SetActive(true);
+            enemyInstance.Init(KillEnemy);            }, enemyInstance =>
         {   enemyInstance.gameObject.SetActive(false);}, enemyInstance =>
         {   Destroy(enemyInstance.gameObject);},
             collectionChecks);
@@ -31,7 +32,7 @@ public class EnemyObjectPool : MonoBehaviour
         enemyInstance.StartCoroutine("ReturnToPool", 0);
     }
 
-    private void KillEnemy(EnemyController enemyInstance)
+    public void KillEnemy(EnemyController enemyInstance)
     {
         enemyInstance.StopAllCoroutines();
         enemyPool.Release(enemyInstance);
