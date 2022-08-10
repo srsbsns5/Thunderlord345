@@ -36,8 +36,6 @@ public class EnemyController : MonoBehaviour
         attackDamage = enemy.damage;
         expAmt = enemy.expDropped;
         navAgent.speed = enemy.moveSpeed;
-
-        print(health);
     }
 
     private void Update()

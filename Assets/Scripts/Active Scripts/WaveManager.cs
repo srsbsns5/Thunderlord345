@@ -16,14 +16,13 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         GenerateWave();
-        print(enemyPools.Count);
     }
 
     private void Update() 
     {
         if (enemiesToSpawn.Count > 0)
         {
-            enemyPools[0].enemyPool.Get();
+            enemiesToSpawn[0].enemyPool.Get();
             enemiesToSpawn.RemoveAt(0);
         }
     }
@@ -40,8 +39,9 @@ public class WaveManager : MonoBehaviour
         List<EnemyObjectPool> generatedEnemies = new List<EnemyObjectPool>();
         while (waveValue > 0)
         {
-            int randEnemyID = Random.Range(0, enemyPools.Count-1);
+            int randEnemyID = Random.Range(0, enemyPools.Count);
             int randEnemyCost = enemyPools[randEnemyID].spawnCost;
+            print("random id " + randEnemyID);
 
             if (waveValue-randEnemyCost>=0)
             {
