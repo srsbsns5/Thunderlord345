@@ -41,7 +41,6 @@ public class WaveManager : MonoBehaviour
         {
             int randEnemyID = Random.Range(0, enemyPools.Count);
             int randEnemyCost = enemyPools[randEnemyID].spawnCost;
-            print("random id " + randEnemyID);
 
             if (waveValue-randEnemyCost>=0)
             {

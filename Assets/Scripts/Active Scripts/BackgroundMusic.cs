@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class BackgroundMusic : MonoBehaviour
 {
-    AudioSource[] bgm;
-    bool startHasPlayed;
+    public AudioSource[] bgm;
     private void Awake() 
     {
         bgm[0].Play();
-        startHasPlayed = false;
+        EventManager.StartEnded += RunLoopBGM;
     }
     
     private void Update() 
     {
-        while (bgm[0].isPlaying)
-        {
-            startHasPlayed = false;
-            if(!bgm[0].isPlaying)
-            {
-                startHasPlayed = true;
-                break;
-            }
-        }
+        if (!bgm[0].isPlaying) EventManager.PlayLoop();
+    }
+
+    void RunLoopBGM()
+    {
+        bgm[1].Play();
+        EventManager.StartEnded -= RunLoopBGM;
     }
 }
