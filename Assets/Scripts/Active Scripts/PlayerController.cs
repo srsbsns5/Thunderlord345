@@ -11,17 +11,20 @@ public class PlayerController : MonoBehaviour
     private InputAction move;
     private InputAction jump;
     private InputAction interact;
-    [Header("Picking Upping")]
+    private InputAction attack;
+
+    [Header("Equipping")]
+    public GameObject equippedWeaponPrefab;
+    public Transform weaponSlot;
+    WeaponController wepaonC;
     public GameObject itemToPick;
-    [SerializeField] GameObject pickupGlow;
-
-
     [Header("CHARACTERistics")]
     public Character character;
     float speed = 12f;
     public float maxHealth = 100f;
     float stamina = 50f;
     public float jumpSpeed = 5f;
+    GameObject pickupGlow;
 
     [Header ("GroundCheck")]
     public Transform groundCheck;
@@ -37,7 +40,7 @@ public class PlayerController : MonoBehaviour
     public Text healthText;
 
     Vector2 moveDirection = Vector2.zero;
-    WeaponController wepaon;
+    
     private void Start() 
     {
         speed = character.moveSpeed;
@@ -46,7 +49,12 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         healthText.text = currentHealth + "/" + maxHealth;
 
-        wepaon = GetComponent<WeaponController>();
+        equippedWeaponPrefab.transform.position = weaponSlot.position;
+        equippedWeaponPrefab.transform.SetParent(weaponSlot.transform);
+        wepaonC = equippedWeaponPrefab.GetComponent<WeaponController>();
+
+        pickupGlow = transform.Find("groundCheck").Find("PickupGlow").gameObject;
+        EventManager.NewItemEquip();
     }
     private void Awake() 
     {
@@ -59,6 +67,8 @@ public class PlayerController : MonoBehaviour
         move.Enable();
         jump = playerInputs.Player.Jump;
         jump.Enable();
+        attack = playerInputs.Player.Fire;
+        attack.Enable();
         interact = playerInputs.Player.Interact;
         interact.Enable();
     }
@@ -67,6 +77,7 @@ public class PlayerController : MonoBehaviour
         move.Disable();
         jump.Disable();
         interact.Disable();
+        attack.Disable();
     }
 
     void Update()
@@ -96,14 +107,34 @@ public class PlayerController : MonoBehaviour
 
         if (itemToPick != null) PickUpItem();
         else return;
+
+         if (playerInputs.Player.Fire.triggered)
+        {
+            Attack();
+        }
     }
 
     void PickUpItem()
     {        
         if(playerInputs.Player.Interact.triggered)
         {
-            print("Item Picked Up");
-            wepaon.weaponEquipped = itemToPick.GetComponent<Weapon>();
+            print("Picking Up");
+            Destroy(equippedWeaponPrefab.gameObject); //removes previous weapon
+            
+            equippedWeaponPrefab = itemToPick.gameObject; //changes the equipped weapon object
+            itemToPick.transform.Find("interactable").gameObject.SetActive(false);
+            itemToPick = null;
+            
+            pickupGlow.SetActive(false);
+            equippedWeaponPrefab.transform.position = weaponSlot.position; //moves picked up item to slot
+            equippedWeaponPrefab.transform.SetParent(weaponSlot.transform);
+            wepaonC = equippedWeaponPrefab.GetComponent<WeaponController>();  //updates weapon controller
+            EventManager.TakeItem += wepaonC.UpdateWeapon; //updates the weapon stats upon new weapon equipped
         }
     }
+    void Attack()
+    {
+        print("Attacking");
+    }
+    
 }
