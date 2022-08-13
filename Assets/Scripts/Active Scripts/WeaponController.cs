@@ -31,6 +31,15 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other) 
+    {
+        if (other.tag == "Enemy")
+        {
+            //Debug.Log(other.name);
+            other.GetComponent<EnemyController>().TakeDamage(damage);
+        }
+    }
+
     public void UpdateWeapon() //updates all weapon stats
     {
         damage = weaponObject.damage;

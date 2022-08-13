@@ -89,11 +89,13 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         //Manage item drops do this in an event instead lol
-        Transform item = dropTable.GetRandom();
-        Instantiate(item, transform);
-        item.SetParent(null);
+        //Transform item = dropTable.GetRandom();
+        //Instantiate(item, transform);
+        //item.SetParent(null);
         
+        EventManager.EnemyKilledInWave();           
         EventManager.SubtractEnemyCount += waveM.WaveProgressor;
+        
         //Have to change this functionality to make it applicable for 2 players, this was just for testing
         //FindObjectOfType<LevelSystem>().GainEXP(expAmt);
 

@@ -8,6 +8,7 @@ TagManager:
   - Enemy 3
   - Enemy 1
   - Interactable
+  - Enemy
   layers:
   - Default
   - TransparentFX
