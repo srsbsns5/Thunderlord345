@@ -20,12 +20,14 @@ public class EnemyController : MonoBehaviour
     public int expAmt; 
     private float currentHealth;
 
-    [Header("Drops")]
+    [Header("Events")]
     public WeightedRandomList<Transform> dropTable;
+    WaveManager waveM;
 
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
+        waveM = FindObjectOfType<WaveManager>();
         
         NavMeshHit closestHit;
 
@@ -91,12 +93,10 @@ public class EnemyController : MonoBehaviour
         Instantiate(item, transform);
         item.SetParent(null);
         
-
+        EventManager.SubtractEnemyCount += waveM.WaveProgressor;
         //Have to change this functionality to make it applicable for 2 players, this was just for testing
         //FindObjectOfType<LevelSystem>().GainEXP(expAmt);
-        print(killAction);
-        print(this);
-        
+
         this.StopAllCoroutines();
         killAction(this); //Returns item to pool
     }

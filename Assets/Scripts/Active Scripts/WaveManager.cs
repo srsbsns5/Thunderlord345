@@ -8,13 +8,16 @@ public class WaveManager : MonoBehaviour
 {
     public int currentWave;
     public int waveValue;
+    public int enemiesInWave;
     public List<EnemyObjectPool> enemyPools = new List<EnemyObjectPool>(); //enemy pools
     public List<EnemyObjectPool> enemiesToSpawn = new List<EnemyObjectPool>();
 
     public Text waveText;
+    public Text enemiesLeft;
     
     void Start()
     {
+        EventManager.EnemyKilledInWave();
         GenerateWave();
     }
 
@@ -27,14 +30,14 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public void GenerateWave()
+    private void GenerateWave()
     {
         waveText.text = "Wave " + currentWave;
-        waveValue = currentWave * 10;        
+        waveValue = currentWave * 10;
         GenerateEnemies();
     }
     
-    public void GenerateEnemies()
+    private void GenerateEnemies()
     {
         List<EnemyObjectPool> generatedEnemies = new List<EnemyObjectPool>();
         while (waveValue > 0)
@@ -53,7 +56,22 @@ public class WaveManager : MonoBehaviour
             }
         }
 
+        enemiesInWave = generatedEnemies.Count;
+        enemiesLeft.text = enemiesInWave + " enemies remaining";
+
         enemiesToSpawn.Clear();
         enemiesToSpawn = generatedEnemies;
+    }
+
+    public void WaveProgressor()
+    {
+        enemiesInWave--;
+        enemiesLeft.text = enemiesInWave + " enemies remaining";
+
+        if (enemiesInWave == 0)
+        {
+            currentWave++;
+            GenerateWave();
+        }
     }
 }

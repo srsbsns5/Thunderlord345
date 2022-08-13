@@ -15,10 +15,20 @@ public class WeaponController : MonoBehaviour
     int ammo;
     float cooldown;
     float range;
-    void Start()
+    void Awake()
     {
         EventManager.NewItemEquip();
-        EventManager.TakeItem += UpdateWeapon;
+
+        //NULL CHECKIN
+        if(weaponObject != null) EventManager.TakeItem += UpdateWeapon;
+        else 
+        {
+            damage = 0;
+            fireRate = 0;
+            ammo = 0;
+            cooldown = 0;
+            range = 0;
+        }
     }
 
     public void UpdateWeapon() //updates all weapon stats
