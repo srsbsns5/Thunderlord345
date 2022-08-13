@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
@@ -15,7 +14,6 @@ public class WaveManager : MonoBehaviour
 
     public Text waveText;
     public Text enemiesLeft;
-    public UnityEvent canvasReset;
     
     void Start()
     {
@@ -68,8 +66,6 @@ public class WaveManager : MonoBehaviour
 
     public void WaveProgressor()
     {
-        canvasReset?.Invoke();
-
         Debug.Log("Wave Progressing");
 
         enemiesInWave--;
