@@ -14,6 +14,7 @@ public class LoadScene : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("TestScene");
+        Destroy(GameObject.Find("BGM"));
         Time.timeScale = 1f;
 
     }

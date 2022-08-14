@@ -9,6 +9,7 @@ TagManager:
   - Enemy 1
   - Interactable
   - Enemy
+  - Audio
   layers:
   - Default
   - TransparentFX
