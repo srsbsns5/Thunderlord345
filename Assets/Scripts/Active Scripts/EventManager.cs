@@ -10,6 +10,8 @@ public class EventManager : MonoBehaviour
     public static event Action StartEnded;
     public static event Action TakeItem;
     public static event Action SubtractEnemyCount;
+    public static event Action AllowPreWaveActions;
+    public static event Action EndPreWaveActions;
 
     public static void PlayLoop()
     {
@@ -22,5 +24,14 @@ public class EventManager : MonoBehaviour
     public static void EnemyKilledInWave()
     {
         SubtractEnemyCount?.Invoke();
+    }
+
+    public static void WaveEnded()
+    {
+        AllowPreWaveActions?.Invoke();
+    }
+    public static void WaveStarted()
+    {
+        EndPreWaveActions?.Invoke();
     }
 }

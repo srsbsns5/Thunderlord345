@@ -74,8 +74,17 @@ public class WaveManager : MonoBehaviour
         if (enemiesInWave == 0)
         {
             currentWave++;
-            GenerateWave();
+            StartCoroutine(BetweenWaves());
         }
         EventManager.SubtractEnemyCount -= WaveProgressor;
+
+    }
+
+    public IEnumerator BetweenWaves()
+    {
+        print("betweenwave start");
+        yield return new WaitForSeconds(5);
+        print("betweenwave end");
+        GenerateWave();
     }
 }
