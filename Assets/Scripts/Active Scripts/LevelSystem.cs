@@ -29,7 +29,7 @@ public class LevelSystem : MonoBehaviour
     {
         frontXPBar.fillAmount = currentXP /requiredXP;
         backXPBar.fillAmount = currentXP /requiredXP;
-        levelText.text = "Level " + level;
+        levelText.text = "LV " + level;
 
         requiredXP = CalculateRequiredXP();
 
@@ -65,7 +65,7 @@ public class LevelSystem : MonoBehaviour
         }
 
         xpText.text = currentXP + "/" + requiredXP;
-        levelText.text = "Level " + level;
+        levelText.text = "LV " + level;
 
     }
     public void GainEXP(float xpGained)

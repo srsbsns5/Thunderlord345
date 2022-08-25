@@ -95,9 +95,8 @@ public class EnemyController : MonoBehaviour
         
         EventManager.EnemyKilledInWave();           
         EventManager.SubtractEnemyCount += waveM.WaveProgressor;
-        
-        //Have to change this functionality to make it applicable for 2 players, this was just for testing
-        //FindObjectOfType<LevelSystem>().GainEXP(expAmt);
+
+        target.transform.Find("LevelSystemHolder").GetComponent<LevelSystem>().GainEXP(expAmt);
 
         this.StopAllCoroutines();
         killAction(this); //Returns item to pool
