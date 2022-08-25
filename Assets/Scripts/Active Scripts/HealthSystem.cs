@@ -42,6 +42,7 @@ public class HealthSystem : MonoBehaviour
     public void AdjustPlayerHealth(int amountToChange)
     {
         currentHealth += amountToChange;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
         UpdateHealth();
     }
 

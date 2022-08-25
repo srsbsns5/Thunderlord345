@@ -6,7 +6,9 @@ public class Shop : MonoBehaviour
 {
     public GameObject ingameShop;
     public LevelSystem levelSys;
+    public HealthSystem healthSys;
     [SerializeField] int level;
+    
     [Header("Goods Database")]
     public GameObject[] upgrades;
     private void Start() 

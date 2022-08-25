@@ -8,10 +8,17 @@ public class ShopItem : MonoBehaviour
     public int buyLimit;
     public int currentTimesBought;
     public Image buttonImage;
+    public Shop shop;
+
+    float currentHP;
+    float maxHP;
     private void OnEnable() 
     {
         currentTimesBought = buyLimit;
         EventManager.AllowPreWaveActions += ResetLimit;
+
+        currentHP = shop.healthSys.currentHealth;
+        maxHP = shop.healthSys.maxHealth;
     }
 
     public void ResetLimit()
@@ -30,20 +37,35 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void HealthUpgrade(int increaseAmount)
+    public void SlightHeal(float increaseAmount)
     {
-        //make it so players can increase their maxhealth here
+        increaseAmount = shop.healthSys.maxHealth / 5;
+        currentHP += increaseAmount;
+
+        if (currentHP > maxHP) currentHP = maxHP;
+    }
+    public void ModerateHeal(float increaseAmount)
+    {
+        increaseAmount = shop.healthSys.maxHealth / 3;
+        currentHP += increaseAmount;
+
+        if (currentHP > maxHP) currentHP = maxHP;
+    }
+    public void FullHeal()
+    {
+        currentHP = maxHP;   
+    }
+
+    public void ReviveHalf()
+    {
+        
     }
 
     /* Upgrades to add
-    increase max health slightly
-    increase max health moderately
-    heal slightly
-    heal moderately
-    heal fully
     recover teammate to half health
     recover teammate to full heatlh
-    increase player strength slightly
-    increase player strength moderately
+    weapon gacha 1
+    weapon gacha 2
+    weapon gacha 3
     */
 }
