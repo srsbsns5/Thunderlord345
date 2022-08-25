@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
     public static event Action SubtractEnemyCount;
     public static event Action AllowPreWaveActions;
     public static event Action EndPreWaveActions;
+    public static event Action UpdatePlayerHealth;
 
     public static void PlayLoop()
     {
@@ -33,5 +34,10 @@ public class EventManager : MonoBehaviour
     public static void WaveStarted()
     {
         EndPreWaveActions?.Invoke();
+    }
+
+    public static void ChangeHealth()
+    {
+        UpdatePlayerHealth?.Invoke();
     }
 }

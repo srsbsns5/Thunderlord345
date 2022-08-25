@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class LevelSystem : MonoBehaviour
 {
+    public GameObject playerHealth;
+    HealthSystem healthSystem;
+    
+    [Header("Statistics")]
     public int level;
     public float currentXP;
     public float requiredXP;
-
     private float lerpTimer;
     private float delayTimer;
-
-    PlayerController playerHealth;
-
     [Header ("UI")]
     public Image frontXPBar;
     public Image backXPBar;
@@ -33,9 +33,7 @@ public class LevelSystem : MonoBehaviour
 
         requiredXP = CalculateRequiredXP();
 
-        //FindObjectOfType is a bad idea when dealing with two or more players
-        //Again this is just for testing
-        playerHealth = FindObjectOfType<PlayerController>();
+        healthSystem = playerHealth.GetComponent<HealthSystem>();
     }
 
     void Update()
@@ -84,7 +82,7 @@ public class LevelSystem : MonoBehaviour
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);
         
         //Increase stats
-        playerHealth.maxHealth = Mathf.RoundToInt(playerHealth.maxHealth + level * 2.5f);
+        healthSystem.maxHealth = Mathf.RoundToInt(healthSystem.maxHealth + level * 2.5f);
 
         requiredXP = CalculateRequiredXP();
     }

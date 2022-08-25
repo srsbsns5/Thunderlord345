@@ -6,8 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Controls")]
     public CharacterController charaController;
-    public PlayerControls playerInputs;
+    public PlayerControls playerInputBindings;
     private InputAction move;
     private InputAction jump;
     private InputAction interact;
@@ -33,21 +34,12 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
     public float gravity = -12f;
     Vector3 velocity;
-
-    [Header("UI")]
-    public Image healthBar;
-    public float currentHealth;
-    public Text healthText;
-
     Vector2 moveDirection = Vector2.zero;
     
     private void Start() 
     {
         speed = character.moveSpeed;
         stamina = character.stamina;      
-        maxHealth = character.health;
-        currentHealth = maxHealth;
-        healthText.text = currentHealth + "/" + maxHealth;
 
         equippedWeaponPrefab.transform.position = weaponSlot.position;
         equippedWeaponPrefab.transform.SetParent(weaponSlot.transform);
@@ -58,18 +50,18 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake() 
     {
-        playerInputs = new PlayerControls();
+        playerInputBindings = new PlayerControls();
     }
 
     private void OnEnable() 
     {
-        move = playerInputs.Player.Move;
+        move = playerInputBindings.Player.Move;
         move.Enable();
-        jump = playerInputs.Player.Jump;
+        jump = playerInputBindings.Player.Jump;
         jump.Enable();
-        attack = playerInputs.Player.Fire;
+        attack = playerInputBindings.Player.Fire;
         attack.Enable();
-        interact = playerInputs.Player.Interact;
+        interact = playerInputBindings.Player.Interact;
         interact.Enable();
     }
     private void OnDisable() 
@@ -96,19 +88,17 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         charaController.Move(velocity * Time.deltaTime);
 
-        if (playerInputs.Player.Jump.triggered && isGrounded)
+        if (playerInputBindings.Player.Jump.triggered && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpSpeed * -2f * gravity);
         }
 
         #endregion
-    
-        healthText.text = currentHealth + "/" + maxHealth;
 
         if (itemToPick != null) PickUpItem();
         else return;
 
-         if (playerInputs.Player.Fire.triggered)
+         if (playerInputBindings.Player.Fire.triggered)
         {
             Attack();
         }
@@ -116,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
     void PickUpItem()
     {        
-        if(playerInputs.Player.Interact.triggered)
+        if(playerInputBindings.Player.Interact.triggered)
         {
             print("Picking Up");
             Destroy(equippedWeaponPrefab.gameObject); //removes previous weapon
