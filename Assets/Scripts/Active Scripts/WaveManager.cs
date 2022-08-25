@@ -83,8 +83,10 @@ public class WaveManager : MonoBehaviour
     public IEnumerator BetweenWaves()
     {
         print("betweenwave start");
+        EventManager.WaveEnded();
         yield return new WaitForSeconds(5);
         print("betweenwave end");
+        EventManager.WaveStarted();
         GenerateWave();
     }
 }
