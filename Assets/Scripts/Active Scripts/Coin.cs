@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-        private void OnTriggerEnter(Collider other) 
+    public AudioSource audioS;
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.tag == "Player")
         {
             other.GetComponent<CoinCollector>().IncreaseCoinCount();
+            audioS.Play();
 
             if (!other.GetComponent<CoinCollector>())
             {

@@ -14,6 +14,9 @@ public class WaveManager : MonoBehaviour
 
     public Text waveText;
     public Text enemiesLeft;
+
+    public AudioSource waveStartAudio;
+    public AudioSource waveEndAudio;
     
     void Start()
     {
@@ -83,10 +86,13 @@ public class WaveManager : MonoBehaviour
     public IEnumerator BetweenWaves()
     {
         print("betweenwave start");
+
         EventManager.WaveEnded();
+        waveEndAudio.Play();
         yield return new WaitForSeconds(5);
         print("betweenwave end");
         EventManager.WaveStarted();
+        waveStartAudio.Play();
         GenerateWave();
     }
 }

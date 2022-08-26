@@ -67,6 +67,7 @@ MonoBehaviour:
     list:
     - item: {fileID: 0}
       weight: 2
+  enemyHitAudio: {fileID: 0}
 --- !u!195 &4396982165263819346
 NavMeshAgent:
   m_ObjectHideFlags: 0

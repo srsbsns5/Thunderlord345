@@ -22,12 +22,14 @@ public class EnemyController : MonoBehaviour
 
     [Header("Events")]
     public WeightedRandomList<Transform> dropTable;
+    public AudioSource enemyHitAudio;
     WaveManager waveM;
 
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
         waveM = FindObjectOfType<WaveManager>();
+        enemyHitAudio = GameObject.FindGameObjectWithTag("Enemy 1").GetComponent<AudioSource>();
         
         NavMeshHit closestHit;
 
@@ -80,6 +82,8 @@ public class EnemyController : MonoBehaviour
 
         print("Enemy has" + currentHealth + "hp");
         
+        enemyHitAudio.Play();
+
         if (currentHealth <= 0)
         {
             Die();

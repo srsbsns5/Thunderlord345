@@ -6,6 +6,7 @@ public class LevelSystem : MonoBehaviour
 {
     public GameObject playerHealth;
     HealthSystem healthSystem;
+    public AudioSource audioS;
     
     [Header("Statistics")]
     public int level;
@@ -77,6 +78,8 @@ public class LevelSystem : MonoBehaviour
     public void LevelUp()
     {
         level++;
+        audioS.Play();
+
         frontXPBar.fillAmount = 0;
         backXPBar.fillAmount = 0;
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);

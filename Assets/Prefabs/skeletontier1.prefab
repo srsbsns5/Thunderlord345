@@ -77,6 +77,7 @@ MonoBehaviour:
       weight: 1
     - item: {fileID: 5242834752004837072, guid: 1b29bf8e2e02fde47bd6a334c532929f, type: 3}
       weight: 9
+  enemyHitAudio: {fileID: 0}
 --- !u!136 &1501587196364467858
 CapsuleCollider:
   m_ObjectHideFlags: 0
