@@ -14,6 +14,7 @@ public class EventManager : MonoBehaviour
     public static event Action EndPreWaveActions;
     public static event Action UpdatePlayerHealth;
     public static event Action UpdateEXP;
+    public static event Action GameEnded;
 
     public static void PlayLoop()
     {
@@ -45,5 +46,9 @@ public class EventManager : MonoBehaviour
     public static void IncreaseEXP()
     {
         UpdateEXP?.Invoke();
+    }
+    public static void EndGame()
+    {
+        GameEnded?.Invoke();
     }
 }
