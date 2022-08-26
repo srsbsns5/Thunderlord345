@@ -26,6 +26,7 @@ public class LoseScreen : MonoBehaviour
     {
         EventManager.GameEnded += ShowLoseScreen;
         EventManager.SubtractEnemyCount += IncreaseEnemyKillCount;
+        EventManager.CoinCollect += IncreaseCoinCount;
     }
 
     private void Update()

@@ -17,8 +17,8 @@ public class ShopItem : MonoBehaviour
         currentTimesBought = buyLimit;
         EventManager.AllowPreWaveActions += ResetLimit;
 
-        currentHP = shop.healthSys.currentHealth;
-        maxHP = shop.healthSys.maxHealth;
+        currentHP = shop.currentPlayerHealthSys.currentHealth;
+        maxHP = shop.currentPlayerHealthSys.maxHealth;
     }
 
     public void ResetLimit()
@@ -26,7 +26,7 @@ public class ShopItem : MonoBehaviour
         currentTimesBought = buyLimit;
     }
 
-    public void TimesBoughtTracker()
+    public void BuyableTracker()
     {
         currentTimesBought--;
 
@@ -37,26 +37,39 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void SlightHeal(float increaseAmount)
+    public void SlightHeal(float increaseAmount, int cost)
     {
-        increaseAmount = shop.healthSys.maxHealth / 5;
-        currentHP += increaseAmount;
+        if (shop.playerCoinInventory.inventoryCoins >= cost)
+        {
+            increaseAmount = shop.currentPlayerHealthSys.maxHealth / 5;
+            currentHP += increaseAmount;
 
-        if (currentHP > maxHP) currentHP = maxHP;
+            if (currentHP > maxHP) currentHP = maxHP;
+            shop.playerCoinInventory.inventoryCoins -= cost;           
+        }
+        
     }
-    public void ModerateHeal(float increaseAmount)
+    public void ModerateHeal(float increaseAmount, int cost)
     {
-        increaseAmount = shop.healthSys.maxHealth / 3;
-        currentHP += increaseAmount;
+        if (shop.playerCoinInventory.inventoryCoins >= cost)
+        {
+            increaseAmount = shop.currentPlayerHealthSys.maxHealth / 3;
+            currentHP += increaseAmount;
 
-        if (currentHP > maxHP) currentHP = maxHP;
+            if (currentHP > maxHP) currentHP = maxHP;
+            shop.playerCoinInventory.inventoryCoins -= cost;
+        }
     }
-    public void FullHeal()
+    public void FullHeal(int cost)
     {
-        currentHP = maxHP;   
+        if (shop.playerCoinInventory.inventoryCoins >= cost)
+        {
+            currentHP = maxHP;   
+            shop.playerCoinInventory.inventoryCoins -= cost;
+        }
     }
 
-    public void ReviveHalf()
+    public void ReviveHalf(int cost)
     {
         
     }

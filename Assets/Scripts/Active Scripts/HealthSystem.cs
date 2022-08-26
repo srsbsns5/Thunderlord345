@@ -9,6 +9,8 @@ public class HealthSystem : MonoBehaviour
     public PlayerController playerReference;
     public PlayerTwoController playerTwoReference;
 
+    public bool isDead;
+
     public float maxHealth = 100f;
     public float currentHealth;
     public Image healthBar;
@@ -17,7 +19,7 @@ public class HealthSystem : MonoBehaviour
     void Start()
     {
         EventManager.ChangeHealth();
-        EventManager.UpdatePlayerHealth += UpdateHealth;
+        EventManager.UpdatePlayerHealth += UpdateHealthUI;
 
         if (playerToReference == 1)
         {
@@ -43,12 +45,34 @@ public class HealthSystem : MonoBehaviour
     {
         currentHealth += amountToChange;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
-        UpdateHealth();
+        UpdateHealthUI();
+
+        if (currentHealth <= 0) PlayerDie();
     }
 
-    void UpdateHealth()
+    void UpdateHealthUI()
     {
         healthBar.fillAmount = currentHealth / maxHealth;
         healthText.text = currentHealth + "/" + maxHealth;
+    }
+
+    void PlayerDie()
+    {
+        isDead = true;
+
+        switch (playerToReference)
+        {
+            case 1: 
+                playerReference.gameObject.SetActive(false);
+                break;
+
+            case 2: 
+                playerTwoReference.gameObject.SetActive(false);
+                break;
+
+            default:
+                Debug.LogError("Player reference is null.");
+                break;
+        }
     }
 }
