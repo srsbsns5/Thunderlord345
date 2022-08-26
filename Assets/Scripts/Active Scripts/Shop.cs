@@ -21,6 +21,10 @@ public class Shop : MonoBehaviour
         EventManager.EndPreWaveActions += ForceCloseShop;
     }
 
+    private void Update() {
+        level = levelSys.level;
+    }
+
     void ShopActive()
     {
         ingameShop.SetActive(true);
