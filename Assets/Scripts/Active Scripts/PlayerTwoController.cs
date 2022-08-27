@@ -33,13 +33,14 @@ public class PlayerTwoController : MonoBehaviour
     bool isGrounded;
     public float gravity = -12f;
     Vector3 velocity;
-
     Vector2 moveDirection = Vector2.zero;
+    Animator anim;
     
     private void Start() 
     {
         speed = character.moveSpeed;
-        stamina = character.stamina;      
+        stamina = character.stamina;   
+        anim = GetComponent<Animator>();   
 
         equippedWeaponPrefab.transform.position = weaponSlot.position;
         equippedWeaponPrefab.transform.SetParent(weaponSlot.transform);
@@ -85,10 +86,19 @@ public class PlayerTwoController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         charaController.Move(velocity * Time.deltaTime);
 
+        if (moveDirection.x != 0 || moveDirection.y != 0) { anim.SetBool("isMoving",true); }
+        else anim.SetBool("isMoving",false);
+
         if (playerInputBindings.Player.Jump.triggered && isGrounded)
         {
+            print("jum");
             velocity.y = Mathf.Sqrt(jumpSpeed * -2f * gravity);
-        }
+            anim.SetBool("isJumping", true);
+        }   
+            else
+            {
+                anim.SetBool("isJumping", false);
+            }
 
         #endregion
 

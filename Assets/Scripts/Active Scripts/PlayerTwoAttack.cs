@@ -27,6 +27,15 @@ public class PlayerTwoAttack : MonoBehaviour
 
     private void Update() 
     {
-        if (playerInputBindings.Player.Attack.triggered) print("attack");
+        if (playerInputBindings.Player.Attack.triggered)  
+        {
+            print("Attacking");
+            //Attack();
+            anim.SetBool("isAttacking", true);
+        }
+        else
+        {
+            anim.SetBool("isAttacking", false);
+        }
     }
 }

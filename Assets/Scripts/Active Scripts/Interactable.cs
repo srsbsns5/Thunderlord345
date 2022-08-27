@@ -7,7 +7,13 @@ public class Interactable : MonoBehaviour
         if (other.tag == "Player")
         {
             other.transform.Find("groundCheck").transform.Find("PickupGlow").gameObject.SetActive(true);
-            other.GetComponent<PlayerController>().itemToPick = gameObject.transform.parent.gameObject;
+            if (other.GetComponent<PlayerController>() != null)
+            {
+                other.GetComponent<PlayerController>().itemToPick = gameObject.transform.parent.gameObject;
+            } else if (other.GetComponent<PlayerTwoController>() != null)
+            {
+                other.GetComponent<PlayerTwoController>().itemToPick = gameObject.transform.parent.gameObject;
+            }
         }
     }
 
@@ -16,7 +22,13 @@ public class Interactable : MonoBehaviour
         if (other.tag == "Player")
         {
             other.transform.Find("groundCheck").Find("PickupGlow").gameObject.SetActive(false);
-            other.GetComponent<PlayerController>().itemToPick = null;
+            if (other.GetComponent<PlayerController>() != null)
+            {
+                other.GetComponent<PlayerController>().itemToPick = null;
+            } else if (other.GetComponent<PlayerTwoController>() != null)
+            {
+                other.GetComponent<PlayerTwoController>().itemToPick = null;
+            }
         }
     }
 

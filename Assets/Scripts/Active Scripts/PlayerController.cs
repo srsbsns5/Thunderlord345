@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour
     private InputAction move;
     private InputAction jump;
     private InputAction interact;
-    private InputAction attack;
-
     [Header("Equipping")]
     public GameObject equippedWeaponPrefab;
     public Transform weaponSlot;
@@ -62,8 +60,6 @@ public class PlayerController : MonoBehaviour
         move.Enable();
         jump = playerInputBindings.Player.Jump;
         jump.Enable();
-        attack = playerInputBindings.Player.Attack;
-        attack.Enable();
         interact = playerInputBindings.Player.Interact;
         interact.Enable();
     }
@@ -72,7 +68,6 @@ public class PlayerController : MonoBehaviour
         move.Disable();
         jump.Disable();
         interact.Disable();
-        attack.Disable();
     }
 
     void Update()
@@ -108,22 +103,6 @@ public class PlayerController : MonoBehaviour
 
         if (itemToPick != null) PickUpItem();
         else return;
-
-        if (playerInputBindings.Player.Attack.triggered)
-        {
-            print("Attacking");
-            //Attack();
-            //anim.SetLayerWeight(0, 0.5f);
-            //nim.SetLayerWeight(1, 1f);
-           // anim.SetBool("isAttacking", true);
-        }
-        else
-        {
-           // anim.SetLayerWeight(0, 1f);
-           // anim.SetLayerWeight(1, 0f);
-           // anim.SetBool("isAttacking", false);
-        }
-
     }
 
     void PickUpItem()
