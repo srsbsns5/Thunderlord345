@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     WeaponController wepaonC;
     public GameObject itemToPick;
     [Header("CHARACTERistics")]
+    public bool canMove = true;
     public Character character;
     float speed = 12f;
     public float maxHealth = 100f;
@@ -72,6 +73,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+    if(canMove)
+    {
+
         #region player physics
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
@@ -98,6 +102,7 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetBool("isJumping", false);
             }
+    }
 
         #endregion
 

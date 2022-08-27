@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8869097076141166936}
   - component: {fileID: 160013440833287567}
   - component: {fileID: 4396982165263819346}
+  - component: {fileID: 39193247040558506}
   m_Layer: 7
   m_Name: skeletontier2
   m_TagString: Enemy
@@ -89,6 +90,21 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &39193247040558506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5284090356775278686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10df89b98886d1249be17c28139efc79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 11400000, guid: c67c5651df60d4a4f8a867ba0d4e1876, type: 2}
+  canAttack: 0
+  hitThreshold: 5
 --- !u!1001 &4656521621638618853
 PrefabInstance:
   m_ObjectHideFlags: 0

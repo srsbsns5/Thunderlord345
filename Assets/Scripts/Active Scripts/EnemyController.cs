@@ -14,8 +14,6 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent navAgent;
     [Header ("Stats")]
     float health;
-    float attackRate;
-    int attackDamage;
     int moveSpeed;
     public int expAmt; 
     private float currentHealth;
@@ -45,8 +43,6 @@ public class EnemyController : MonoBehaviour
     {
         health = enemy.health;
         currentHealth = health;
-        attackRate = enemy.attackRate;
-        attackDamage = enemy.damage;
         expAmt = enemy.expDropped;
         navAgent.speed = enemy.moveSpeed;
     }
