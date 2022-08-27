@@ -11,29 +11,18 @@ public class TimelineController : MonoBehaviour
 
     public void ForwardTimePoint()
     {
-        for (int i = 0; i < timePoints.Length; i++)
-        {
-            i++;
-            currDirector.time = timePoints[i];
+        currTimePt++;
+        currDirector.time = timePoints[currTimePt];
             
-            currTimePt = i;
-            if (timePoints[i] > timePoints.Length) return;
-            
-        }
-
+        if (timePoints[currTimePt] > timePoints.Length) currTimePt = timePoints.Length-1;   
     }
 
     public void BackwardTimePoint()
     {
-        for (int i = 0; i < timePoints.Length; i++)
-        {
-            i--;
-            currDirector.time = timePoints[i];
-            
-            currTimePt = i;
-            
-            if (timePoints[i] < 0) return;
-        }
+        currTimePt--;
+        currDirector.time = timePoints[currTimePt];
+        
+        if (timePoints[currTimePt] < 0) currTimePt = 0;
     }
 
     public void LoopSequence (float timeToResetTo)
