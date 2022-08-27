@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
     Vector2 moveDirection = Vector2.zero;
 
     Animator anim;
-    public bool isMoving;
     
     private void Start() 
     {
@@ -106,8 +105,13 @@ public class PlayerController : MonoBehaviour
          if (playerInputBindings.Player.Fire.triggered)
         {
             Attack();
+            anim.SetBool("isAttacking", true);
         }
-        
+        else
+        {
+            anim.SetBool("isAttacking", false);
+        }
+
     }
 
     void PickUpItem()
@@ -136,6 +140,8 @@ public class PlayerController : MonoBehaviour
     void AnimationHandle()
     {
         bool isMoving = anim.GetBool("isMoving");
+        bool isJumping = anim.GetBool("isJumping");
+
         if (playerInputBindings.Player.Move.triggered)
         {
             anim.SetBool("isMoving",true);
@@ -149,6 +155,10 @@ public class PlayerController : MonoBehaviour
         if (playerInputBindings.Player.Jump.triggered && isGrounded)
         {
             anim.SetBool("isJumping", true);
+        }
+        else
+        {
+            anim.SetBool("isJumping", false);
         }
     }
     
