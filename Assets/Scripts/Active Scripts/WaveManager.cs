@@ -9,6 +9,8 @@ public class WaveManager : MonoBehaviour
     public int currentWave;
     public int waveValue;
     public int enemiesInWave;
+    public GameObject HUD;
+
     public List<EnemyObjectPool> enemyPools = new List<EnemyObjectPool>(); //enemy pools
     public List<EnemyObjectPool> enemiesToSpawn = new List<EnemyObjectPool>();
 
@@ -17,12 +19,21 @@ public class WaveManager : MonoBehaviour
 
     public AudioSource waveStartAudio;
     public AudioSource waveEndAudio;
+    public AudioSource gameBGM;
     
     void Start()
     {
-        GenerateWave();
+        StartCoroutine(GameStartSequence());
         EventManager.SubtractEnemyCount += WaveProgressor;
+    }
 
+    IEnumerator GameStartSequence()
+    {
+        yield return new WaitForSeconds(3);
+        HUD.SetActive(true);
+        yield return new WaitForSeconds(1);
+        gameBGM.Play();
+        GenerateWave();
     }
 
     private void Update() 
