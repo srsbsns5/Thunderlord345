@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerLook : MonoBehaviour
+public class PlayerTwoLook : MonoBehaviour
 {
     public float senstivity = 100f;
     public Transform playerTrans;
-    public PlayerControls playerInputs;
+    public Player2Controls playerInputs;
     private InputAction look;
     private InputAction interact;
 
@@ -16,7 +16,7 @@ public class PlayerLook : MonoBehaviour
     Vector2 lookDirection;
     private void Awake() 
     {
-        playerInputs = new PlayerControls();
+        playerInputs = new Player2Controls();
     }
 
     private void OnEnable() 

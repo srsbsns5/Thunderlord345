@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         move.Enable();
         jump = playerInputBindings.Player.Jump;
         jump.Enable();
-        attack = playerInputBindings.Player.Fire;
+        attack = playerInputBindings.Player.Attack;
         attack.Enable();
         interact = playerInputBindings.Player.Interact;
         interact.Enable();
@@ -77,7 +77,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        AnimationHandle();
         #region player physics
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
@@ -89,34 +88,47 @@ public class PlayerController : MonoBehaviour
         Vector3 movement =(moveDirection.y * transform.forward) + (moveDirection.x * transform.right);
         charaController.Move(movement * speed * Time.deltaTime);
 
+        if (moveDirection.x != 0 || moveDirection.y != 0) { anim.SetBool("isMoving",true); }
+        else anim.SetBool("isMoving",false);
+
         velocity.y += gravity * Time.deltaTime;
         charaController.Move(velocity * Time.deltaTime);
 
         if (playerInputBindings.Player.Jump.triggered && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpSpeed * -2f * gravity);
-        }
+            anim.SetBool("isJumping", true);
+        }   
+            else
+            {
+                anim.SetBool("isJumping", false);
+            }
 
         #endregion
 
         if (itemToPick != null) PickUpItem();
         else return;
 
-         if (playerInputBindings.Player.Fire.triggered)
+        if (playerInputBindings.Player.Attack.triggered)
         {
-            Attack();
-            anim.SetBool("isAttacking", true);
+            print("Attacking");
+            //Attack();
+            //anim.SetLayerWeight(0, 0.5f);
+            //nim.SetLayerWeight(1, 1f);
+           // anim.SetBool("isAttacking", true);
         }
         else
         {
-            anim.SetBool("isAttacking", false);
+           // anim.SetLayerWeight(0, 1f);
+           // anim.SetLayerWeight(1, 0f);
+           // anim.SetBool("isAttacking", false);
         }
 
     }
 
     void PickUpItem()
     {        
-        if(playerInputBindings.Player.Interact.triggered)
+        if (playerInputBindings.Player.Interact.triggered)
         {
             print("Picking Up");
             Destroy(equippedWeaponPrefab.gameObject); //removes previous weapon
@@ -132,34 +144,4 @@ public class PlayerController : MonoBehaviour
             EventManager.TakeItem += wepaonC.UpdateWeapon; //updates the weapon stats upon new weapon equipped
         }
     }
-    void Attack()
-    {
-        print("Attacking");
-    }
-
-    void AnimationHandle()
-    {
-        bool isMoving = anim.GetBool("isMoving");
-        bool isJumping = anim.GetBool("isJumping");
-
-        if (playerInputBindings.Player.Move.triggered)
-        {
-            anim.SetBool("isMoving",true);
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
-        }
-
-
-        if (playerInputBindings.Player.Jump.triggered && isGrounded)
-        {
-            anim.SetBool("isJumping", true);
-        }
-        else
-        {
-            anim.SetBool("isJumping", false);
-        }
-    }
-    
 }

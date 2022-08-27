@@ -12,7 +12,6 @@ public class PlayerTwoController : MonoBehaviour
     private InputAction move;
     private InputAction jump;
     private InputAction interact;
-    private InputAction attack;
 
     [Header("Equipping")]
     public GameObject equippedWeaponPrefab;
@@ -60,8 +59,6 @@ public class PlayerTwoController : MonoBehaviour
         move.Enable();
         jump = playerInputBindings.Player.Jump;
         jump.Enable();
-        attack = playerInputBindings.Player.Fire;
-        attack.Enable();
         interact = playerInputBindings.Player.Interact;
         interact.Enable();
     }
@@ -70,7 +67,6 @@ public class PlayerTwoController : MonoBehaviour
         move.Disable();
         jump.Disable();
         interact.Disable();
-        attack.Disable();
     }
 
     void Update()
@@ -98,11 +94,6 @@ public class PlayerTwoController : MonoBehaviour
 
         if (itemToPick != null) PickUpItem();
         else return;
-
-         if (playerInputBindings.Player.Fire.triggered)
-        {
-            Attack();
-        }
     }
 
     void PickUpItem()
@@ -123,9 +114,4 @@ public class PlayerTwoController : MonoBehaviour
             EventManager.TakeItem += wepaonC.UpdateWeapon; //updates the weapon stats upon new weapon equipped
         }
     }
-    void Attack()
-    {
-        print("Attacking");
-    }
-    
 }
