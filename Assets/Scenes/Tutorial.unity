@@ -254,7 +254,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press LMB or X to SLAY YOUR FOES
+  m_Text: Press LMB or y to SLAY YOUR FOES
 --- !u!222 &110080806
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1380,7 +1380,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press LMB or X to SLAY YOUR FOES
+  m_Text: Press Space or A to JUMP
 --- !u!222 &801783370
 CanvasRenderer:
   m_ObjectHideFlags: 0

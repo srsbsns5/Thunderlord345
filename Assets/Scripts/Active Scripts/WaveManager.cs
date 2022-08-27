@@ -61,7 +61,7 @@ public class WaveManager : MonoBehaviour
         }
 
         enemiesInWave = generatedEnemies.Count;
-        enemiesLeft.text = enemiesInWave + " enemies remaining";
+        enemiesLeft.text = "Enemies left: " + enemiesInWave;
 
         enemiesToSpawn.Clear();
         enemiesToSpawn = generatedEnemies;
@@ -72,7 +72,7 @@ public class WaveManager : MonoBehaviour
         Debug.Log("Wave Progressing");
 
         enemiesInWave--;
-        enemiesLeft.text = enemiesInWave + " enemies remaining";
+        enemiesLeft.text = "Enemies left: " + enemiesInWave;
 
         if (enemiesInWave == 0)
         {
