@@ -35,11 +35,15 @@ public class PlayerController : MonoBehaviour
     public float gravity = -12f;
     Vector3 velocity;
     Vector2 moveDirection = Vector2.zero;
+
+    Animator anim;
+    public bool isMoving;
     
     private void Start() 
     {
         speed = character.moveSpeed;
-        stamina = character.stamina;      
+        stamina = character.stamina;
+        anim = GetComponent<Animator>();
 
         equippedWeaponPrefab.transform.position = weaponSlot.position;
         equippedWeaponPrefab.transform.SetParent(weaponSlot.transform);
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        AnimationHandle();
         #region player physics
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
@@ -102,6 +107,7 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
+        
     }
 
     void PickUpItem()
@@ -125,6 +131,25 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         print("Attacking");
+    }
+
+    void AnimationHandle()
+    {
+        bool isMoving = anim.GetBool("isMoving");
+        if (playerInputBindings.Player.Move.triggered)
+        {
+            anim.SetBool("isMoving",true);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
+        }
+
+
+        if (playerInputBindings.Player.Jump.triggered && isGrounded)
+        {
+            anim.SetBool("isJumping", true);
+        }
     }
     
 }
