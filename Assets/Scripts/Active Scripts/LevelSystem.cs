@@ -19,6 +19,7 @@ public class LevelSystem : MonoBehaviour
     public Image backXPBar;
     public Image xpBarHolder;
     public Text levelText;
+    public GameObject ding;
     public Text xpText;
 
     [Header ("Calculations")]
@@ -88,6 +89,15 @@ public class LevelSystem : MonoBehaviour
         healthSystem.maxHealth = Mathf.RoundToInt(healthSystem.maxHealth + level * 2.5f);
 
         requiredXP = CalculateRequiredXP();
+        StartCoroutine(Ding());
+    }
+
+    IEnumerator Ding()
+    {
+        ding.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.5f);
+        ding.SetActive(false);
+        
     }
 
     private int CalculateRequiredXP()

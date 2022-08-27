@@ -63,10 +63,9 @@ MonoBehaviour:
   enemy: {fileID: 11400000, guid: c67c5651df60d4a4f8a867ba0d4e1876, type: 2}
   enemyPrefab: {fileID: 5284090356775278686}
   expAmt: 5
-  dropTable:
-    list:
-    - item: {fileID: 0}
-      weight: 2
+  coin: {fileID: 7777849406937799756, guid: 01176254894e40e46adb67e94ef79c0d, type: 3}
+  deathParticle: {fileID: 1213423228199152332, guid: 6f605ea2a53ceeb4c933f1ddef43cb95, type: 3}
+  hitParticle: {fileID: 6337682164572197562, guid: 0388b7682a6a4ed4a9c8eaee221226d2, type: 3}
   enemyHitAudio: {fileID: 0}
 --- !u!195 &4396982165263819346
 NavMeshAgent:

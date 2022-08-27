@@ -5,6 +5,11 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     public AudioSource audioS;
+    private void OnEnable() 
+    {
+        audioS = GameObject.FindGameObjectWithTag("Enemy 2").GetComponent<AudioSource>();
+        Destroy(gameObject, 20f);    
+    }
     private void OnTriggerEnter(Collider other) 
     {
         if (other.tag == "Player")

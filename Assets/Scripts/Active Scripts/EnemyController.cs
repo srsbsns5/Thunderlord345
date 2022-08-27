@@ -21,7 +21,9 @@ public class EnemyController : MonoBehaviour
     private float currentHealth;
 
     [Header("Events")]
-    public WeightedRandomList<Transform> dropTable;
+    public GameObject coin;
+    public GameObject deathParticle;
+    public GameObject hitParticle;
     public AudioSource enemyHitAudio;
     WaveManager waveM;
 
@@ -80,6 +82,8 @@ public class EnemyController : MonoBehaviour
     {
         currentHealth -= damageToTake;
 
+        Instantiate(hitParticle, transform.position, transform.rotation);
+
         print("Enemy has" + currentHealth + "hp");
         
         enemyHitAudio.Play();
@@ -92,18 +96,29 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        //Manage item drops do this in an event instead lol
-        //Transform item = dropTable.GetRandom();
-        //Instantiate(item, transform);
-        //item.SetParent(null);
-        
-        EventManager.EnemyKilledInWave();           
+        SpawnCoin();
+        SpawnDeathParticles();
+
+        EventManager.EnemyKilledInWave();
         EventManager.SubtractEnemyCount += waveM.WaveProgressor;
 
         target.transform.Find("LevelSystemHolder").GetComponent<LevelSystem>().GainEXP(expAmt);
 
         this.StopAllCoroutines();
         killAction(this); //Returns item to pool
+    }
+
+    void SpawnDeathParticles()
+    {
+        Instantiate(deathParticle, transform.position, transform.rotation);
+        deathParticle.transform.SetParent(null);
+    }
+
+    void SpawnCoin()
+    {
+        Vector3 spawnLocation = transform.position;
+        Instantiate(coin, spawnLocation, transform.rotation);
+        coin.transform.SetParent(null);
     }
 
     public IEnumerator ReturnToPool(int i)

@@ -71,12 +71,9 @@ MonoBehaviour:
   enemy: {fileID: 11400000, guid: bd846c0643925a843944c6d1782368fb, type: 2}
   enemyPrefab: {fileID: 1110057224865567951}
   expAmt: 5
-  dropTable:
-    list:
-    - item: {fileID: 5033595773697789637, guid: 34d8b24b4ff016c4fb130419d83991bb, type: 3}
-      weight: 1
-    - item: {fileID: 5242834752004837072, guid: 1b29bf8e2e02fde47bd6a334c532929f, type: 3}
-      weight: 9
+  coin: {fileID: 7777849406937799756, guid: 01176254894e40e46adb67e94ef79c0d, type: 3}
+  deathParticle: {fileID: 1213423228199152332, guid: 6f605ea2a53ceeb4c933f1ddef43cb95, type: 3}
+  hitParticle: {fileID: 6337682164572197562, guid: 0388b7682a6a4ed4a9c8eaee221226d2, type: 3}
   enemyHitAudio: {fileID: 0}
 --- !u!136 &1501587196364467858
 CapsuleCollider:
