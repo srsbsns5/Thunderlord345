@@ -30,7 +30,17 @@ public class LoadScene : MonoBehaviour
         SceneManager.LoadScene("Credits");
         Time.timeScale = 1f;
     }
-     public void QuitGame()
+    public void LevelSelect()
+    {
+        SceneManager.LoadScene("LevelSelect");
+        Time.timeScale = 1f;
+    }
+    public void Tutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+        Time.timeScale = 1f;
+    }
+    public void QuitGame()
     {
         Application.Quit();
         Debug.Log("Quit Game");
