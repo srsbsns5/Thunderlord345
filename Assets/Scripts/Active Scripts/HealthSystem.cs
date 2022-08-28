@@ -43,7 +43,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    public void IncreasePlayerHealth(int amountToChange)
+    public void IncreasePlayerHealth(float amountToChange)
     {
         currentHealth += amountToChange;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
@@ -64,7 +64,11 @@ public class HealthSystem : MonoBehaviour
 
         UpdateHealthUI();
 
-        if (currentHealth <= 0) PlayerDie();
+        if (currentHealth <= 0) 
+        {
+            currentHealth = 0;
+            PlayerDie();
+        }
     }
 
     void UpdateHealthUI()
@@ -83,7 +87,6 @@ public class HealthSystem : MonoBehaviour
                 playerObject.SetActive(false); //set sprite inactive
                 gameObject.SetActive(false); //hp system inactive
                 playerReference.weaponSlot.gameObject.SetActive(false);
-                playerReference.canMove = false;
                 playerReference.gameObject.tag = "Untagged";
                 break;
 
@@ -91,7 +94,6 @@ public class HealthSystem : MonoBehaviour
                 playerObject.SetActive(false);
                 gameObject.SetActive(false);
                 playerTwoReference.weaponSlot.gameObject.SetActive(false);
-                playerTwoReference.canMove = false;
                 playerTwoReference.gameObject.tag = "Untagged";
                 break;
 
@@ -100,7 +102,7 @@ public class HealthSystem : MonoBehaviour
                 break;
         }
     }
-    void PlayerAlive()
+    public void PlayerAlive()
     {
         isDead = false;
 
@@ -110,7 +112,6 @@ public class HealthSystem : MonoBehaviour
                 playerObject.SetActive(true); //set sprite inactive
                 gameObject.SetActive(true); //hp system inactive
                 playerReference.weaponSlot.gameObject.SetActive(true);
-                playerReference.canMove = true;
                 playerReference.gameObject.tag = "Player";
                 break;
 
@@ -118,7 +119,6 @@ public class HealthSystem : MonoBehaviour
                 playerObject.SetActive(true);
                 gameObject.SetActive(true);
                 playerTwoReference.weaponSlot.gameObject.SetActive(true);
-                playerTwoReference.canMove = true;
                 playerTwoReference.gameObject.tag = "Player";
                 break;
 

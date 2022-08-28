@@ -5,80 +5,77 @@ using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour
 {
-    public int buyLimit;
-    public int currentTimesBought;
     public Image buttonImage;
     public Shop shop;
 
+    public AudioSource buySuccess;
+    public AudioSource buyFail;
+
+
     float currentHP;
     float maxHP;
-    private void OnEnable() 
+    private void Awake() 
     {
-        currentTimesBought = buyLimit;
-        EventManager.AllowPreWaveActions += ResetLimit;
-
         currentHP = shop.currentPlayerHealthSys.currentHealth;
         maxHP = shop.currentPlayerHealthSys.maxHealth;
     }
 
-    public void ResetLimit()
-    {
-        currentTimesBought = buyLimit;
-    }
 
-    public void BuyableTracker()
+    public void SlightHeal(int cost)
     {
-        currentTimesBought--;
-
-        if(currentTimesBought <= buyLimit) //if player has reached the buy limit, disable the button
-        {
-            buttonImage.color = new Color (255,255,255, 55);
-            gameObject.GetComponent<Button>().enabled = false;
-        }
-    }
-
-    public void SlightHeal(float increaseAmount, int cost)
-    {
+        print(shop.playerCoinInventory.inventoryCoins);
+        float increaseAmount;
         if (shop.playerCoinInventory.inventoryCoins >= cost)
         {
-            increaseAmount = shop.currentPlayerHealthSys.maxHealth / 5;
-            currentHP += increaseAmount;
+            increaseAmount = Mathf.RoundToInt(shop.currentPlayerHealthSys.maxHealth / 5);
+            shop.currentPlayerHealthSys.IncreasePlayerHealth(increaseAmount);
+            print(increaseAmount);
 
-            if (currentHP > maxHP) currentHP = maxHP;
-            shop.playerCoinInventory.inventoryCoins -= cost;           
+            shop.playerCoinInventory.inventoryCoins -= cost;     
+            buySuccess.Play();                  
         }
-        
+        else {buyFail.Play();}
     }
-    public void ModerateHeal(float increaseAmount, int cost)
+    public void ModerateHeal(int cost)
     {
+        float increaseAmount;
         if (shop.playerCoinInventory.inventoryCoins >= cost)
         {
             increaseAmount = shop.currentPlayerHealthSys.maxHealth / 3;
-            currentHP += increaseAmount;
+            shop.currentPlayerHealthSys.IncreasePlayerHealth(increaseAmount);
 
-            if (currentHP > maxHP) currentHP = maxHP;
             shop.playerCoinInventory.inventoryCoins -= cost;
+            buySuccess.Play();            
         }
+        else {buyFail.Play();}
     }
     public void FullHeal(int cost)
     {
         if (shop.playerCoinInventory.inventoryCoins >= cost)
         {
-            currentHP = maxHP;   
+            float increaseAmount;
+            increaseAmount = 9999;
+            shop.currentPlayerHealthSys.IncreasePlayerHealth(increaseAmount);
+            
             shop.playerCoinInventory.inventoryCoins -= cost;
+            buySuccess.Play();
         }
+        else {buyFail.Play();}
     }
 
-    public void ReviveHalf(int cost)
+    public void Revive(int cost)
     {
-        
+        if (shop.otherPlayerHealthSys.isDead)
+        {
+            shop.otherPlayerHealthSys.PlayerAlive();
+            shop.otherPlayerHealthSys.IncreasePlayerHealth(Mathf.RoundToInt(shop.otherPlayerHealthSys.maxHealth / 2));
+            shop.playerCoinInventory.inventoryCoins -= cost;
+            buySuccess.Play();
+        }
+        else {buyFail.Play();}
     }
 
     /* Upgrades to add
-    recover teammate to half health
-    recover teammate to full heatlh
     weapon gacha 1
-    weapon gacha 2
-    weapon gacha 3
     */
 }

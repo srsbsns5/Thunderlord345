@@ -80,7 +80,7 @@ public class EnemyController : MonoBehaviour
 
         Instantiate(hitParticle, transform.position, transform.rotation);
 
-        print("Enemy has" + currentHealth + "hp");
+        //print("Enemy has" + currentHealth + "hp");
         
         enemyHitAudio.Play();
 

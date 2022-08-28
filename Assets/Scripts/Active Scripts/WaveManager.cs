@@ -80,8 +80,6 @@ public class WaveManager : MonoBehaviour
 
     public void WaveProgressor()
     {
-        Debug.Log("Wave Progressing");
-
         enemiesInWave--;
         enemiesLeft.text = "Enemies left: " + enemiesInWave;
 
@@ -96,12 +94,11 @@ public class WaveManager : MonoBehaviour
 
     public IEnumerator BetweenWaves()
     {
-        print("betweenwave start");
-
         EventManager.WaveEnded();
         waveEndAudio.Play();
-        yield return new WaitForSeconds(5);
-        print("betweenwave end");
+
+        yield return new WaitForSeconds(30);
+
         EventManager.WaveStarted();
         waveStartAudio.Play();
         GenerateWave();
