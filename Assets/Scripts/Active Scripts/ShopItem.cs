@@ -11,6 +11,7 @@ public class ShopItem : MonoBehaviour
     public AudioSource buySuccess;
     public AudioSource buyFail;
 
+    public GameObject chest;
 
     float currentHP;
     float maxHP;
@@ -56,7 +57,7 @@ public class ShopItem : MonoBehaviour
             float increaseAmount;
             increaseAmount = 9999;
             shop.currentPlayerHealthSys.IncreasePlayerHealth(increaseAmount);
-            
+
             shop.playerCoinInventory.inventoryCoins -= cost;
             buySuccess.Play();
         }
@@ -71,6 +72,23 @@ public class ShopItem : MonoBehaviour
             shop.otherPlayerHealthSys.IncreasePlayerHealth(Mathf.RoundToInt(shop.otherPlayerHealthSys.maxHealth / 2));
             shop.playerCoinInventory.inventoryCoins -= cost;
             buySuccess.Play();
+        }
+        else {buyFail.Play();}
+    }
+
+    public void WeaponGacha(int cost)
+    {
+        if (shop.playerCoinInventory.inventoryCoins >= cost)
+        {
+            if (chest.GetComponent<Chest>().isOpen())
+            {
+                chest.GetComponent<Chest>().CloseChest();
+            }
+            else
+            {
+                chest.SetActive(true);
+                chest.gameObject.GetComponent<Chest>().OpenChest();
+            }
         }
         else {buyFail.Play();}
     }

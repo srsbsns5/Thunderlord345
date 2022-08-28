@@ -7,6 +7,7 @@ public class Chest : MonoBehaviour
 {
     public Transform itemHolder;
     public WeightedRandomList<Transform> lootTable;
+    public GameObject itemLight;
 
     Animator anim;
 
@@ -17,80 +18,21 @@ public class Chest : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-    private void Awake() 
+    public void OpenChest()
     {
-        playerInputs = new PlayerControls();
-    }
-    private void OnEnable() 
-    {
-        interact = playerInputs.Player.Interact;
-        interact.Enable();        
-    }
-    private void OnDisable() 
-    {
-        interact.Disable();       
+        anim.SetTrigger("Open");
     }
 
-    void Update()
+    public void CloseChest()
     {
-        if(InRange())
-        {
-            if (playerInputs.Player.Interact.triggered)
-            {
-                if (isOpen())
-                {
-                    anim.SetTrigger("Close");
-                    HideItem();
-                }
-                else
-                {
-                    anim.SetTrigger("Open");
-                }
-            }
-        }
+        anim.SetTrigger("Close");
+        itemLight.SetActive(false);
+        HideItem();
     }
 
-    bool isOpen()
+    public bool isOpen()
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName("ChestOpen");
-    }
-    bool InRange()
-    {
-        GameObject nearestPlayer = FindClosestPlayer();
-
-        Vector3 differenceFromPlayer = transform.position - nearestPlayer.transform.position;
-        float distanceFromPlayer = differenceFromPlayer.sqrMagnitude;
-
-        if (distanceFromPlayer <= 2)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-
-    private UnityEngine.GameObject FindClosestPlayer()
-    {
-        UnityEngine.GameObject[] targets;
-        targets = UnityEngine.GameObject.FindGameObjectsWithTag("Player");
-
-        UnityEngine.GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach (UnityEngine.GameObject active in targets)
-        {
-            Vector3 diff = active.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
-            {
-                closest = active;
-                distance = curDistance;
-            }
-        }
-        return closest;
     }
 
     void HideItem()
@@ -105,6 +47,7 @@ public class Chest : MonoBehaviour
     }
     void ShowItem()
     {
+        itemLight.SetActive(true);
         Transform item = lootTable.GetRandom();
         Instantiate(item, itemHolder);
         itemHolder.gameObject.SetActive(true);

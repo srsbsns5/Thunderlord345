@@ -67,6 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3278206788756183132}
   - component: {fileID: 3278206788756183133}
+  - component: {fileID: 7287199900461489506}
   m_Layer: 0
   m_Name: uc_Axe
   m_TagString: Untagged
@@ -103,6 +104,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.63, z: 0.13}
   m_Center: {x: 0.38, y: 0.48, z: 0}
+--- !u!114 &7287199900461489506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278206788756183134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5143ec662cbba044b8e9d9cc5d95b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemylayer:
+    serializedVersion: 2
+    m_Bits: 128
+  weaponObject: {fileID: 11400000, guid: 9256fd44b84f1e24abb4c00ae6389331, type: 2}
 --- !u!1001 &3278206789753895779
 PrefabInstance:
   m_ObjectHideFlags: 0
