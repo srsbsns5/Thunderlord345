@@ -885,7 +885,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1576973441}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: LevelSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
