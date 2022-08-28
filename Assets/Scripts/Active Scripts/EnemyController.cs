@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
+        
         navAgent = GetComponent<NavMeshAgent>();
         waveM = FindObjectOfType<WaveManager>();
         enemyHitAudio = GameObject.FindGameObjectWithTag("Enemy 1").GetComponent<AudioSource>();

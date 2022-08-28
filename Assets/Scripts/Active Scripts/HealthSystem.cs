@@ -85,14 +85,12 @@ public class HealthSystem : MonoBehaviour
         {
             case 1: 
                 playerObject.SetActive(false); //set sprite inactive
-                gameObject.SetActive(false); //hp system inactive
                 playerReference.weaponSlot.gameObject.SetActive(false);
                 playerReference.gameObject.tag = "Untagged";
                 break;
 
             case 2: 
                 playerObject.SetActive(false);
-                gameObject.SetActive(false);
                 playerTwoReference.weaponSlot.gameObject.SetActive(false);
                 playerTwoReference.gameObject.tag = "Untagged";
                 break;

@@ -105,14 +105,11 @@ public class PlayerTwoController : MonoBehaviour
     }
 
         #endregion
-
-        if (itemToPick != null) PickUpItem();
-        else return;
     }
 
-    void PickUpItem()
+    public void PickUpItem()
     {        
-        if(playerInputBindings.Player.Interact.triggered)
+        if (itemToPick != null)
         {
             print("Picking Up");
             Destroy(equippedWeaponPrefab.gameObject); //removes previous weapon

@@ -34,8 +34,10 @@ public class Shop : MonoBehaviour
 
     void ShopActive()
     {
-        ingameShop.SetActive(true);
-      
+        if (!currentPlayerHealthSys.isDead)
+        {
+            ingameShop.SetActive(true);
+        }
     }
 
     void GenerateShopItems()

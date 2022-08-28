@@ -12,6 +12,10 @@ public class ShopItem : MonoBehaviour
     public AudioSource buyFail;
 
     public GameObject chest;
+    public GameObject chestCam;
+    public GameObject chestItemHolder;
+    public GameObject equipItem;
+    public GameObject discardItem;
 
     float currentHP;
     float maxHP;
@@ -80,20 +84,40 @@ public class ShopItem : MonoBehaviour
     {
         if (shop.playerCoinInventory.inventoryCoins >= cost)
         {
-            if (chest.GetComponent<Chest>().isOpen())
-            {
-                chest.GetComponent<Chest>().CloseChest();
-            }
-            else
-            {
-                chest.SetActive(true);
-                chest.gameObject.GetComponent<Chest>().OpenChest();
-            }
+            chest.SetActive(true);
+            chest.gameObject.GetComponent<Chest>().OpenChest();
         }
         else {buyFail.Play();}
     }
+    public void P2EquipWeapon()
+    {
+        FindObjectOfType<PlayerTwoController>().itemToPick = chestItemHolder.transform.GetChild(0).gameObject;
+        FindObjectOfType<PlayerTwoController>().PickUpItem();
 
-    /* Upgrades to add
-    weapon gacha 1
-    */
+        chest.gameObject.GetComponent<Chest>().CloseChest();
+    }
+
+    public void P1EquipWeapon()
+    {
+        FindObjectOfType<PlayerController>().itemToPick = chestItemHolder.transform.GetChild(0).gameObject;
+        FindObjectOfType<PlayerController>().PickUpItem();
+
+        chest.gameObject.GetComponent<Chest>().CloseChest();
+    }
+
+    public void DiscardWeapon()
+    {
+        chest.gameObject.GetComponent<Chest>().CloseChest();
+    }
+    private void OnEnable()
+    {
+        if (chestCam!=null)
+        chestCam.SetActive(true);
+    }
+
+    private void OnDisable() 
+    {
+        if (chestCam!=null)
+        chestCam.SetActive(false);
+    }
 }

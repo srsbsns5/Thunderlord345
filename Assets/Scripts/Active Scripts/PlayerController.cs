@@ -106,21 +106,20 @@ public class PlayerController : MonoBehaviour
 
         #endregion
 
-        if (itemToPick != null) PickUpItem();
-        else return;
+
     }
 
-    void PickUpItem()
-    {        
-        if (playerInputBindings.Player.Interact.triggered)
+    public void PickUpItem()
+    {
+        if (itemToPick != null)
         {
             print("Picking Up");
             Destroy(equippedWeaponPrefab.gameObject); //removes previous weapon
-            
+                
             equippedWeaponPrefab = itemToPick.gameObject; //changes the equipped weapon object
             itemToPick.transform.Find("interactable").gameObject.SetActive(false);
             itemToPick = null;
-            
+                
             pickupGlow.SetActive(false);
             equippedWeaponPrefab.transform.position = weaponSlot.position; //moves picked up item to slot
             equippedWeaponPrefab.transform.SetParent(weaponSlot.transform);

@@ -6,13 +6,18 @@ using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField]bool EndGameCalled = false;
     public int currentWave;
     public int waveValue;
     public int enemiesInWave;
     public GameObject HUD;
 
+    public HealthSystem player;
+    public HealthSystem player2;
+
     public List<EnemyObjectPool> enemyPools = new List<EnemyObjectPool>(); //enemy pools
     public List<EnemyObjectPool> enemiesToSpawn = new List<EnemyObjectPool>();
+    public GameObject[] pools;
 
     public Text waveText;
     public Text enemiesLeft;
@@ -42,6 +47,21 @@ public class WaveManager : MonoBehaviour
         {
             enemiesToSpawn[0].enemyPool.Get();
             enemiesToSpawn.RemoveAt(0);
+        }
+
+        
+        if (!EndGameCalled)
+        {
+            if (player.isDead && player2.isDead)
+            {
+                EventManager.EndGame();
+                EndGameCalled = true;
+
+                foreach (GameObject enemypool in pools)
+                {
+                    enemypool.SetActive(false);
+                }
+            }
         }
     }
 
