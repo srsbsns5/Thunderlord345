@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
+    public bool killPlayer;
     public int playerToReference;
     public PlayerController playerReference;
     public PlayerTwoController playerTwoReference;
@@ -40,6 +41,11 @@ public class HealthSystem : MonoBehaviour
             maxHealth = playerTwoReference.character.health;;
             currentHealth = maxHealth;
             healthText.text = currentHealth + "/" + maxHealth;
+        }
+
+        if (killPlayer)
+        {
+            DecreasePlayerHealth(9999);
         }
     }
 
