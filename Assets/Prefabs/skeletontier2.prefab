@@ -103,8 +103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: c67c5651df60d4a4f8a867ba0d4e1876, type: 2}
-  canAttack: 0
-  hitThreshold: 5
+  playerHP: {fileID: 0}
+  difference: 0
+  hitThreshold: 1
+  attackDamage: 0
 --- !u!1001 &4656521621638618853
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
     private float currentHealth;
 
     [Header("Events")]
+    private Transform spawn;
     public GameObject coin;
     public GameObject deathParticle;
     public GameObject hitParticle;
@@ -27,7 +28,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        
+        spawn = GameObject.FindGameObjectWithTag("Enemy Spawn").transform;
         navAgent = GetComponent<NavMeshAgent>();
         waveM = FindObjectOfType<WaveManager>();
         enemyHitAudio = GameObject.FindGameObjectWithTag("Enemy 1").GetComponent<AudioSource>();
@@ -91,6 +92,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void SpawnAtLocation()
+    {
+        gameObject.transform.position = spawn.transform.position;
+    }
     private void Die()
     {
         SpawnCoin();

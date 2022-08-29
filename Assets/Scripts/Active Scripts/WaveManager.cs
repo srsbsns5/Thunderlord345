@@ -45,7 +45,8 @@ public class WaveManager : MonoBehaviour
     {
         if (enemiesToSpawn.Count > 0)
         {
-            enemiesToSpawn[0].enemyPool.Get();
+            enemiesToSpawn[0].enemyPool.Get(out EnemyController enemyObject);
+            enemyObject.SpawnAtLocation();
             enemiesToSpawn.RemoveAt(0);
         }
 
