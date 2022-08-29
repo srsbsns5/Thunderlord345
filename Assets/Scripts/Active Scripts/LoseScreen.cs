@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class LoseScreen : MonoBehaviour 
 {
@@ -12,6 +13,7 @@ public class LoseScreen : MonoBehaviour
     public Text killCount;
     public Text coinCount;
     public Text waveCount;
+    public GameObject selectableObject;
     
     public GameObject bg;
     public AudioSource audioS;
@@ -33,15 +35,24 @@ public class LoseScreen : MonoBehaviour
     {
         if (showlose)
         {
+            EventSystem.current.SetSelectedGameObject(null);
             ShowLoseScreen();
             showlose= false;
         }
+
+        if (bg.activeInHierarchy)
+        {
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else Time.timeScale = 1f;
     }
 
     public void ShowLoseScreen()
     {
-        Time.timeScale = 0f;
         bg.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(selectableObject);
         StartCoroutine(SetLine());
     }
 
