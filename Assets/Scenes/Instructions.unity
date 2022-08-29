@@ -229,11 +229,11 @@ RectTransform:
   m_Father: {fileID: 1576973440}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -52, y: -149}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: -28}
   m_SizeDelta: {x: 783.8188, y: 489.2532}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &311493259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,8 +965,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.817505, y: 46.204605}
-  m_SizeDelta: {x: 1228.7676, y: 228.1001}
+  m_AnchoredPosition: {x: 12.6719, y: 40.9192}
+  m_SizeDelta: {x: 1227.0586, y: 330.2617}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001426554
 MonoBehaviour:
@@ -1003,18 +1003,23 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Objective: Last as many waves of enemies as possible without dying!!!
 
-    1.
-    Use weapons to slay enemies
+    Use
+    weapons to slay enemies
 
-    2. Unlock better weapons by interacting with
-    chests which can be found around the map
+    Unlock better weapons by interacting with chests
+    which can be found around the map
 
-    3.You lose HP when enemies manage
-    to attack you
+    You lose HP when enemies manage to attack
+    you
 
-    4. You LOSE the game when all your HP runs out
+    You LOSE the game when all your HP runs out
 
-    5. HAVE
+    Earn coins as you defeat
+    more enemies
+
+    Coins can be used in the shop to heal up or get better weapons
+
+    HAVE
     FUN!!!
 
 '
