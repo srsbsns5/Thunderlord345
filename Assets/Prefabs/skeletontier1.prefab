@@ -533,6 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10df89b98886d1249be17c28139efc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyParent: {fileID: 1110057224865567951}
   enemy: {fileID: 11400000, guid: bd846c0643925a843944c6d1782368fb, type: 2}
   playerHP: {fileID: 0}
   difference: 0

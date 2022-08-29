@@ -9,7 +9,6 @@ public class PlayerLook : MonoBehaviour
     public Transform playerTrans;
     public PlayerControls playerInputs;
     private InputAction look;
-    private InputAction interact;
 
 
     float xRotation = 0f;
@@ -23,13 +22,10 @@ public class PlayerLook : MonoBehaviour
     {
         look = playerInputs.Player.Look;
         look.Enable();
-        interact = playerInputs.Player.Interact;
-        interact.Enable(); 
     }
     private void OnDisable() 
     {
         look.Disable();
-        interact.Disable();
     }
     void Start()
     {

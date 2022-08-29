@@ -30,7 +30,6 @@ public class PlayerAttack : MonoBehaviour
         if (playerInputBindings.Player.Attack.triggered)
         {
             print("Attacking");
-            //Attack();
             anim.SetBool("isAttacking", true);
         }
         else

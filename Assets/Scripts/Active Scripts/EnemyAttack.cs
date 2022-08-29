@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    Animator anim;
+    [SerializeField] GameObject enemyParent;
     public Enemy enemy;
     [SerializeField] GameObject playerHP;
     [SerializeField] float difference;
@@ -18,6 +20,7 @@ public class EnemyAttack : MonoBehaviour
     }
     void Update()
     {
+        anim = enemyParent.GetComponent<Animator>();
         playerHP = FindClosestTarget();
         difference = Vector3.Distance(transform.position, playerHP.transform.position);
         
@@ -25,10 +28,13 @@ public class EnemyAttack : MonoBehaviour
         {
             if (difference < hitThreshold)
             {
+                anim.SetBool("isAttacking", true);
                 playerHP.GetComponent<HealthSystem>().DecreasePlayerHealth(attackDamage);        
                 nextAttackTime = Time.time + 1f / attackRate;
             }
+            else anim.SetBool("isAttacking", false);
         }
+        
     }
     private UnityEngine.GameObject FindClosestTarget()
     {

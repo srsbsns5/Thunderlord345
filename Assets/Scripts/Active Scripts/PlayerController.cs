@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public PlayerControls playerInputBindings;
     private InputAction move;
     private InputAction jump;
-    private InputAction interact;
+    private InputAction escape;
     [Header("Equipping")]
     public GameObject equippedWeaponPrefab;
     public Transform weaponSlot;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     Vector2 moveDirection = Vector2.zero;
 
     Animator anim;
+    [SerializeField] GameObject pause;
     
     private void Start() 
     {
@@ -61,14 +63,14 @@ public class PlayerController : MonoBehaviour
         move.Enable();
         jump = playerInputBindings.Player.Jump;
         jump.Enable();
-        interact = playerInputBindings.Player.Interact;
-        interact.Enable();
+        escape = playerInputBindings.Player.Escape;
+        escape.Enable();
     }
     private void OnDisable() 
     {
         move.Disable();
         jump.Disable();
-        interact.Disable();
+        escape.Disable();
     }
 
     void Update()
@@ -106,7 +108,23 @@ public class PlayerController : MonoBehaviour
 
         #endregion
 
-
+        if (playerInputBindings.Player.Escape.triggered)
+        {
+            if (pause.activeInHierarchy)
+            {
+                pause.SetActive(false);
+                Time.timeScale = 1f;
+                Cursor.lockState = CursorLockMode.Locked;
+                EventSystem.current.SetSelectedGameObject(null);
+            }   
+            else 
+            {
+                Cursor.lockState = CursorLockMode.None;
+                pause.SetActive(true);
+                Time.timeScale = 0f;
+                EventSystem.current.SetSelectedGameObject(pause.transform.Find("retry").gameObject);
+            }
+        }
     }
 
     public void PickUpItem()
