@@ -591,7 +591,7 @@ public class @Player2Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""048d8894-99eb-47ad-b5b8-b5980475f6db"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",

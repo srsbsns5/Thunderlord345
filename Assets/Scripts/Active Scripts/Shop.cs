@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class Shop : MonoBehaviour 
 {
     public GameObject ingameShop;
@@ -11,6 +12,7 @@ public class Shop : MonoBehaviour
     public CoinCollector playerCoinInventory;
     [SerializeField] int level;
     public Text coinCount;
+    public GameObject selectableObject;
     
     [Header("Goods Database")]
     public GameObject[] upgrades;
@@ -36,6 +38,11 @@ public class Shop : MonoBehaviour
     {
         if (!currentPlayerHealthSys.isDead)
         {
+            if (selectableObject!=null)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(selectableObject);
+            }
             ingameShop.SetActive(true);
         }
     }
@@ -58,5 +65,7 @@ public class Shop : MonoBehaviour
     void ForceCloseShop()
     {
         ingameShop.SetActive(false);
+        if (selectableObject!=null)
+        {   EventSystem.current.SetSelectedGameObject(null);}
     }
 }
