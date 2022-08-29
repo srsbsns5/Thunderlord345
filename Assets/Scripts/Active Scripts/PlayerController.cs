@@ -115,14 +115,14 @@ public class PlayerController : MonoBehaviour
                 pause.SetActive(false);
                 Time.timeScale = 1f;
                 Cursor.lockState = CursorLockMode.Locked;
-                EventSystem.current.SetSelectedGameObject(pause.transform.Find("retry").gameObject);
+                EventSystem.current.SetSelectedGameObject(null);
             }   
             else 
             {
-                pause.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+                pause.SetActive(true);
                 Time.timeScale = 0f;
-                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(pause.transform.Find("retry").gameObject);
             }
         }
     }
