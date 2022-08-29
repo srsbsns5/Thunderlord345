@@ -224,14 +224,14 @@ RectTransform:
   m_GameObject: {fileID: 311493257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4361, y: 1.4361, z: 1.4361}
   m_Children: []
   m_Father: {fileID: 1576973440}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -28}
+  m_AnchoredPosition: {x: 0, y: -188}
   m_SizeDelta: {x: 783.8188, y: 489.2532}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &311493259
@@ -1012,15 +1012,18 @@ MonoBehaviour:
     You lose HP when enemies manage to attack
     you
 
-    You LOSE the game when all your HP runs out
+    Teleporters can be found around the map which teleports you to another
+    location on the map
 
-    Earn coins as you defeat
-    more enemies
+    Earn coins as you defeat more enemies
 
-    Coins can be used in the shop to heal up or get better weapons
+    Coins can
+    be used in the shop to heal up or get better weapons
 
-    HAVE
-    FUN!!!
+    You LOSE the game when
+    all HP runs out for BOTH players
+
+    HAVE FUN!!!
 
 '
 --- !u!222 &2001426555
