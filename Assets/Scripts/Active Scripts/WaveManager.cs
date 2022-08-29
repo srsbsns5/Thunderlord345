@@ -21,9 +21,11 @@ public class WaveManager : MonoBehaviour
 
     public Text waveText;
     public Text enemiesLeft;
+    public Text gameCountdown;
 
     public AudioSource waveStartAudio;
     public AudioSource waveEndAudio;
+    public AudioSource waveCountDownAudio;
     public AudioSource gameBGM;
     
     void Start()
@@ -34,9 +36,18 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator GameStartSequence()
     {
-        yield return new WaitForSeconds(3);
         HUD.SetActive(true);
         yield return new WaitForSeconds(1);
+        waveCountDownAudio.Play();
+        gameCountdown.text = "3";
+        yield return new WaitForSeconds(1);
+        waveCountDownAudio.Play();
+        gameCountdown.text = "2";
+        yield return new WaitForSeconds(1);
+        waveCountDownAudio.Play();
+        gameCountdown.text = "1";
+        yield return new WaitForSeconds(1);
+        gameCountdown.text = " ";
         gameBGM.Play();
         GenerateWave();
     }
